@@ -1,7 +1,7 @@
-D G "__PCH__" 0 128 ""5.015""
-D G "__DEVICE__" 0 128 "4550"
-D G "__DATE__" 0 128 ""02-Jan-16""
-D G "__TIME__" 0 128 ""14:47:20"" "@ Instucciones de inicio @//"
+D G "__PCH__" 0 217 ""5.015""
+D G "__DEVICE__" 0 217 "4550"
+D G "__DATE__" 0 217 ""05-Jan-16""
+D G "__TIME__" 0 217 ""17:11:45"" "@ Instucciones de inicio @//"
 c L "set_tris_a" 2 1 6 "FUNCTION"
 v L "value" 2 45 "int8" `54 
 f B "set_tris_a" 2 45 "void(int8 value)" `53 
@@ -912,41 +912,83 @@ d G "INT_EEPROM" 2 831 "0x00A010"
 d G "INT_OSCF" 2 832 "0x00A080"
 d G "INT_SPP" 2 833 "0x009D80"
 d G "INT_USB" 2 834 "0x00A020"
-C L "jump_to_irs" 1 8 1 "FUNCTION"
-f G "ADC" 1 10 "void()" `650 
-f G "sampling_ADC" 1 11 "void()" `651 
-f G "calibracion" 1 12 "void()" `652 
-V L "??65535" 1 13 "int16" `654 
-V L "??65535" 1 13 "int16" `655 
-V L "??65535" 1 13 "int16" `656 
-V L "??65535" 1 13 "int16" `657 
-V L "??65535" 1 13 "int16" `658 
-f G "send_info_rs232" 1 13 "void(int16 ,int16 ,int16 ,int16 ,int16 )" `653 
-f G "bucle_stepper_motor" 1 14 "void()" `659 
-V G "stepper_motor" 0 2 "[4]" `660 
-F G "main" 0 4 "void()" `663  "code *"
+D G "l_1" 1 7 "PIN_D0"
+D G "l_2" 1 8 "PIN_D1"
+D G "limit_cort" 1 9 "PIN_D2"
+D G "limit_sensor" 1 10 "PIN_D3"
+D G "motor_pin_1" 1 11 "PIN_B0"
+D G "motor_pin_2" 1 12 "PIN_B1"
+D G "motor_pin_3" 1 13 "PIN_B2"
+D G "motor_pin_4" 1 14 "PIN_B3"
+C L "jump_to_irs" 1 16 1 "FUNCTION"
+f G "ADC" 1 18 "void()" `650 
+f G "sampling_ADC" 1 19 "void()" `651 
+f G "calibracion" 1 20 "void()" `652 
+V L "??65535" 1 21 "int16" `654 
+V L "??65535" 1 21 "int16" `655 
+V L "??65535" 1 21 "int16" `656 
+V L "??65535" 1 21 "int16" `657 
+V L "??65535" 1 21 "int16" `658 
+f G "send_info_rs232" 1 21 "void(int16 ,int16 ,int16 ,int16 ,int16 )" `653 
+f G "r_datos" 1 22 "int16()" `659 
+V L "??65535" 1 23 "int16" `661 
+f G "corte_maquina" 1 23 "int16(int16 )" `660 
+V L "??65535" 1 24 "int8" `663 
+V L "??65535" 1 24 "int8" `664 
+V L "??65535" 1 24 "int8" `665 
+f G "motor_s" 1 24 "void(int8 ,int8 ,int8 )" `662 
+f G "sensor_start" 1 25 "int8()" `666 
+F G "main" 0 4 "void()" `667  "code *"
 C L "main" 0 10 1 "FUNCTION"
-V L "opcion" 0 11 "int8" `666 
+V L "opcion" 0 11 "int8" `670 
 C L "main" 0 10 1 "FUNCTION"
 C L "main" 0 10 1 "FUNCTION"
-V L "a" 0 44 "int16" `654 
-V L "b" 0 44 "int16" `655 
-V L "c" 0 44 "int16" `656 
-V L "d" 0 44 "int16" `657 
-V L "e" 0 44 "int16" `674 
-F G "send_info_rs232" 0 44 "void(int16 a,int16 b,int16 c,int16 d,int16 e)" `653  "@ Envia los datos a la computadora en forma de caracteres @//"
-V L "data" 0 45 "int8[10]" `669 
-V L "x" 0 46 "int8" `670 
-F G "sampling_ADC" 0 65 "void()" `651  "@ Realiza las mediciones que existan en el puerto ADC @//"
-V L "medicion" 0 67 "int16[5]" `672 
-V L "j" 0 69 "int8" `673 
+C L "main" 0 10 1 "FUNCTION"
+C L "main" 0 10 1 "FUNCTION"
+C L "main" 0 10 1 "FUNCTION"
+V L "repeat" 0 30 "int16" `671 
+V L "tiempo_motor" 0 30 "int16" `672 
+V L "i" 0 32 "int8" `673 
+C L "main" 0 10 1 "FUNCTION"
+V L "regreso" 0 39 "int8" `674 
+V L "a" 0 55 "int16" `654 
+V L "b" 0 55 "int16" `655 
+V L "c" 0 55 "int16" `656 
+V L "d" 0 55 "int16" `657 
+V L "e" 0 55 "int16" `683 
+F G "send_info_rs232" 0 55 "void(int16 a,int16 b,int16 c,int16 d,int16 e)" `653  "@ Envia los datos a la computadora en forma de caracteres @//"
+V L "data" 0 56 "int8[10]" `678 
+V L "x" 0 57 "int8" `679 
+F G "sampling_ADC" 0 76 "void()" `651  "@ Realiza las mediciones que existan en el puerto ADC @//"
+V L "medicion" 0 78 "int16[5]" `681 
+V L "j" 0 80 "int8" `682 
 C L "sampling_ADC" 0 10 6 "FUNCTION"
-F G "calibracion" 0 89 "void()" `652 
-V L "limit_1" 0 91 "int1" `674 
-V L "limit_2" 0 91 "int1" `675 
-V L "end" 0 115 "int8" `676 
-F G "bucle_stepper_motor" 0 119 "void()" `659 
-V L "i" 0 121 "int8" `678 
+F G "calibracion" 0 100 "void()" `652 
+V L "limit_1" 0 102 "int1" `683 
+V L "limit_2" 0 102 "int1" `684 
+V L "end" 0 126 "int8" `685 
+F G "r_datos" 0 130 "int16()" `659 
+V L "bucle" 0 132 "int8[2]" `688 
+V L "i" 0 133 "int8" `689 
+C L "r_datos" 0 10 1 "FUNCTION"
+V L "repeat" 0 137 "int16" `690 
+V L "??65535" 0 144 "int16" `697 
+F G "corte_maquina" 0 144 "int16(int16 )" `660 
+V L "num_motor" 0 152 "int8" `663 
+V L "estado" 0 152 "int8" `664 
+V L "direccion" 0 152 "int8" `699 
+F G "motor_s" 0 152 "void(int8 num_motor,int8 estado,int8 direccion)" `662 
+C L "motor_s" 0 10 1 "FUNCTION"
+C L "motor_s" 0 10 1 "FUNCTION"
+C L "motor_s" 0 10 1 "FUNCTION"
+C L "motor_s" 0 10 1 "FUNCTION"
+C L "motor_s" 0 10 1 "FUNCTION"
+C L "motor_s" 0 10 1 "FUNCTION"
+C L "motor_s" 0 10 1 "FUNCTION"
+C L "motor_s" 0 10 1 "FUNCTION"
+C L "motor_s" 0 10 1 "FUNCTION"
+C L "motor_s" 0 10 1 "FUNCTION"
+F G "sensor_start" 0 208 "int8()" `666 
 F B "reset_cpu" 0 0
 F B "abs" 1 0
 F B "sleep" 0 1

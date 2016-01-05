@@ -1,3 +1,4 @@
-      Memory usage:   ROM=2%      RAM=0% - 2%
-      0 Errors,  0 Warnings.
+>>> Warning 208 "E:\Git-Hub\Prog-Adv-PIC\Sensores\Sensores_3.h" Line 23(7,20): Function not void and does not return a value  corte_maquina
+      Memory usage:   ROM=3%      RAM=0% - 2%
+      0 Errors,  1 Warnings.
 Build Successful.

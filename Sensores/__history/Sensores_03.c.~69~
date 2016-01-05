@@ -12,20 +12,20 @@ Void main() {
       opcion = getc();
 
       switch (opcion) {
-        case 'x': //ENVIA LAS LECTURAS DE LOS SENSORES
+        case 'x':
         {
           //printf("Enviando datos...");
           sampling_ADC();
 
           break;
         }
-        case 'c': // CALIBRA LA MAQUINA MANDANDOLA AL ORIGEN
+        case 'c':
         {
           //printf("Calibrando...");
           calibracion();
           break;
         }
-        case 'r': // RECIVE LOS DATOS DE LA PC
+        case 'r':
         {
           int16 repeat, tiempo_motor;
           repeat = r_datos();
@@ -33,13 +33,6 @@ Void main() {
 
             tiempo_motor = corte_maquina(tiempo_motor);
           }
-            break;
-        }
-        case 's':{ // PREPARA PARA EMPEZAR A SENSAR
-          char regreso;
-          regreso = sensor_start();
-
-          printf("%c",regreso);
           break;
         }
         default:
@@ -139,12 +132,10 @@ int16 r_datos(void){
   printf("%c",bucle[0]);
   printf("%c",bucle[1]);
   printf("%Lu",repeat);
-  return repeat;
+  //return repeat;
 }
 int16 corte_maquina(int16){
 
-output_toggle(PIN_D2);
-delay_ms(500);
 
 
 
@@ -166,12 +157,20 @@ void motor_s(int num_motor,char estado,char direccion){
                 output_low(motor_pin_1);
                 break;
               }
+              default:{ //DEFAULT DE DIRRECION
+
+                break;
+              }
             }
           break;
         }
         case 'O':{ // SELECCIONA OFF
           output_low(motor_pin_1);
           output_low(motor_pin_2);
+
+          break;
+        }
+        default:{ //DEFAULT DE ENCENDIDO
 
           break;
         }
@@ -192,6 +191,10 @@ void motor_s(int num_motor,char estado,char direccion){
                 output_low(motor_pin_3);
                 break;
               }
+              default:{
+
+                break;
+              }
             }
           break;
         }
@@ -200,16 +203,17 @@ void motor_s(int num_motor,char estado,char direccion){
           output_low(motor_pin_4);
           break;
         }
+        default:{
+
+          break;
+        }
       }
       break;
     }
-  }
-}
-char sensor_start(void){
+    default:{ // DEFAULT ENCENDIDO
 
-  do {
-    motor_s(1,'I','>');
-  } while((input(limit_sensor)) != 1);
-  motor_s(1,'O',' ');
-  return 'n';
+      break;
+    }
+  }
+
 }

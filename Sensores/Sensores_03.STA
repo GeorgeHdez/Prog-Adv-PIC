@@ -1,53 +1,56 @@
 
-ROM used:   550/32768 (2%)
-            550/32768 (2%) including unused fragments
+ROM used:   1010/32768 (3%)
+            1010/32768 (3%) including unused fragments
 
-            0.6 Average locations per line
-            8.7 Average locations per statement
+            0.9 Average locations per line
+            8.4 Average locations per statement
 
 RAM used:   5/2048 (0%) at main() level
-            38/2048 (2%) worst case
+            44/2048 (2%) worst case
 
-Stack used: 3 worst case (3 in main + 0 for interrupts)
+Stack used: 2 worst case (2 in main + 0 for interrupts)
 Stack size: 31
 
 Lines Stmts  %   Files
 ----- ----- ---  -----
-  127    63 100  Sensores_03.c
-   15     0   0  Sensores_3.h
+  216   120 100  Sensores_03.c
+   26     0   0  Sensores_3.h
   837     0   0  C:\Program Files (x86)\PICC\Devices\18F4550.H
 ----- -----
-  979    63 Total
+ 1079   120 Total
 
 Page ROM  %  RAM   Vol Diff  Functions:
 ---- --- --- ---   --- ----  ----------
-0     38   3    1             @delay_ms1
-0     20   2    0   333  4.3  @const660
-0    116  11    1   333  4.3  main
-0     22   2    0             @const667
-0     36   3    2   700  5.1  @PSTRINGC_115200_31766_31767
-0     82   7   22   700  5.1  send_info_rs232
-0    118  11   12   304  4.2  sampling_ADC
-0     74   7    3   516  5.5  calibracion
-0     40   4    1   120  3.4  bucle_stepper_motor
- Inline         0   120  3.4  @cinit1
+0     38   2    1             @delay_ms1
+0    178   9    1   659  6.7  main
+0     22   1    0             @const676
+0     36   2    2   700  5.1  @PSTRINGC_115200_31766_31767
+0     82   4   22   700  5.1  send_info_rs232
+0    118   6   12   304  4.2  sampling_ADC
+0     72   4    3   497  5.5  calibracion
+0    100   5    2   412  5.5  r_datos
+0    174   9    9    37  1.1  @PRINTF_LU_115200_31766_31767
+0     22   1    3    37  1.1  corte_maquina
+0    122   6    3   794  3.9  motor_s
+0     42   2    1   149  3.5  sensor_start
+ Inline         0             @cinit1
 
 Program metrics:
-    Functions               8
-    Statements              63
-    Comments                171
-    Volume (V)              4744
-    Difficulty (D)          36.3
-    Effort to implement (E) 172110
-    Time to implement (T)   2 hours, 39 minutes
+    Functions               10
+    Statements              120
+    Comments                186
+    Volume (V)              6607
+    Difficulty (D)          42.2
+    Effort to implement (E) 278555
+    Time to implement (T)   4 hours, 18 minutes
     Est Delivered Bugs (B)  1
-    Cyclomatic Complexity   18
-    Maintainability (MI)    142
+    Cyclomatic Complexity   26
+    Maintainability (MI)    116
 
  Segment     Used  Free
 -----------  ----  ----
 00000-00002     4  0  
-00004-07FFE   546  32218  
+00004-07FFE  1006  31758  
 
 
 

@@ -1,16 +1,16 @@
-CCS PCH C Compiler, Version 5.015, 5967               02-Jan-16 14:47
+CCS PCH C Compiler, Version 5.015, 5967               05-Jan-16 17:11
 
-               Filename:   E:\padv\Sensores\Sensores_03.lst
+               Filename:   E:\Git-Hub\Prog-Adv-PIC\Sensores\Sensores_03.lst
 
-               ROM used:   550 bytes (2%)
-                           Largest free fragment is 32218
+               ROM used:   1010 bytes (3%)
+                           Largest free fragment is 31758
                RAM used:   5 (0%) at main() level
-                           38 (2%) worst case
-               Stack used: 3 locations
+                           44 (2%) worst case
+               Stack used: 2 locations
                Stack size: 31
 
 *
-0000:  GOTO   01B2
+0000:  GOTO   0340
 .................... #include <Sensores_3.h> 
 .................... //@ Instucciones de inicio @// 
 .................... #include <18F4550.H> 
@@ -25,41 +25,116 @@ CCS PCH C Compiler, Version 5.015, 5967               02-Jan-16 14:47
 .................... //// form are not restricted in any way.                               //// 
 .................... /////////////////////////////////////////////////////////////////////////// 
 .................... #device PIC18F4550 
-0004:  CLRF   FF7
-0006:  ADDLW  14
-0008:  MOVWF  FF6
-000A:  MOVLW  00
-000C:  ADDWFC FF7,F
-000E:  TBLRD*+
-0010:  MOVF   FF5,W
-0012:  RETURN 0
-0014:  DATA 08,04
-0016:  DATA 02,01
-0018:  DATA 4C,65
-001A:  DATA 74,72
-001C:  DATA 61,20
-001E:  DATA 4E,6F
-0020:  DATA 20,45
-0022:  DATA 73,70
-0024:  DATA 65,63
-0026:  DATA 69,66
-0028:  DATA 69,63
-002A:  DATA 61,64
-002C:  DATA 61,00
+0004:  DATA 4C,65
+0006:  DATA 74,72
+0008:  DATA 61,20
+000A:  DATA 4E,6F
+000C:  DATA 20,45
+000E:  DATA 73,70
+0010:  DATA 65,63
+0012:  DATA 69,66
+0014:  DATA 69,63
+0016:  DATA 61,64
+0018:  DATA 61,00
 *
-018E:  TBLRD*+
-0190:  MOVF   FF5,F
-0192:  BZ    01AE
-0194:  MOVFF  FF6,06
-0198:  MOVFF  FF7,07
-019C:  MOVF   FF5,W
-019E:  BTFSS  F9E.4
-01A0:  BRA    019E
-01A2:  MOVWF  FAD
-01A4:  MOVFF  06,FF6
-01A8:  MOVFF  07,FF7
-01AC:  BRA    018E
-01AE:  GOTO   0214 (RETURN)
+012A:  MOVFF  FEA,19
+012E:  MOVFF  FE9,18
+0132:  SWAPF  12,W
+0134:  IORLW  F0
+0136:  MOVWF  14
+0138:  ADDWF  14,F
+013A:  ADDLW  E2
+013C:  MOVWF  15
+013E:  ADDLW  32
+0140:  MOVWF  17
+0142:  MOVF   12,W
+0144:  ANDLW  0F
+0146:  ADDWF  15,F
+0148:  ADDWF  15,F
+014A:  ADDWF  17,F
+014C:  ADDLW  E9
+014E:  MOVWF  16
+0150:  ADDWF  16,F
+0152:  ADDWF  16,F
+0154:  SWAPF  11,W
+0156:  ANDLW  0F
+0158:  ADDWF  16,F
+015A:  ADDWF  17,F
+015C:  RLCF   16,F
+015E:  RLCF   17,F
+0160:  COMF   17,F
+0162:  RLCF   17,F
+0164:  MOVF   11,W
+0166:  ANDLW  0F
+0168:  ADDWF  17,F
+016A:  RLCF   14,F
+016C:  MOVLW  07
+016E:  MOVWF  13
+0170:  MOVLW  0A
+0172:  DECF   16,F
+0174:  ADDWF  17,F
+0176:  BNC   0172
+0178:  DECF   15,F
+017A:  ADDWF  16,F
+017C:  BNC   0178
+017E:  DECF   14,F
+0180:  ADDWF  15,F
+0182:  BNC   017E
+0184:  DECF   13,F
+0186:  ADDWF  14,F
+0188:  BNC   0184
+018A:  CLRF   FEA
+018C:  MOVLW  13
+018E:  MOVWF  FE9
+0190:  MOVLW  07
+0192:  ANDWF  18,W
+0194:  BCF    18.6
+0196:  ADDWF  FE9,F
+0198:  MOVLW  00
+019A:  ADDWFC FEA,F
+019C:  MOVF   FE9,W
+019E:  SUBLW  17
+01A0:  BNZ   01A8
+01A2:  MOVF   FEA,F
+01A4:  BNZ   01A8
+01A6:  BSF    18.6
+01A8:  MOVF   FEF,W
+01AA:  MOVWF  00
+01AC:  BNZ   01BE
+01AE:  BTFSC  18.6
+01B0:  BRA    01BE
+01B2:  BTFSC  18.4
+01B4:  BRA    01CE
+01B6:  BTFSC  18.3
+01B8:  BRA    01BE
+01BA:  MOVLW  20
+01BC:  BRA    01C4
+01BE:  BSF    18.3
+01C0:  BCF    18.4
+01C2:  MOVLW  30
+01C4:  ADDWF  00,F
+01C6:  MOVF   00,W
+01C8:  BTFSS  F9E.4
+01CA:  BRA    01C8
+01CC:  MOVWF  FAD
+01CE:  MOVF   FEE,W
+01D0:  BTFSS  18.6
+01D2:  BRA    019C
+01D4:  GOTO   0230 (RETURN)
+*
+031C:  TBLRD*+
+031E:  MOVF   FF5,F
+0320:  BZ    033C
+0322:  MOVFF  FF6,0C
+0326:  MOVFF  FF7,0D
+032A:  MOVF   FF5,W
+032C:  BTFSS  F9E.4
+032E:  BRA    032C
+0330:  MOVWF  FAD
+0332:  MOVFF  0C,FF6
+0336:  MOVFF  0D,FF7
+033A:  BRA    031C
+033C:  GOTO   03E0 (RETURN)
 ....................  
 .................... #list 
 ....................  
@@ -67,26 +142,34 @@ CCS PCH C Compiler, Version 5.015, 5967               02-Jan-16 14:47
 .................... #FUSES NOWDT,NOBROWNOUT,NOLVP,NOXINST 
 .................... #use delay(crystal = 20Mhz) 
 *
-00F6:  CLRF   FEA
-00F8:  MOVLW  09
-00FA:  MOVWF  FE9
-00FC:  MOVF   FEF,W
-00FE:  BZ    011A
-0100:  MOVLW  06
-0102:  MOVWF  01
-0104:  CLRF   00
-0106:  DECFSZ 00,F
-0108:  BRA    0106
-010A:  DECFSZ 01,F
-010C:  BRA    0104
-010E:  MOVLW  7B
-0110:  MOVWF  00
-0112:  DECFSZ 00,F
-0114:  BRA    0112
-0116:  DECFSZ FEF,F
-0118:  BRA    0100
-011A:  RETURN 0
+023C:  CLRF   FEA
+023E:  MOVLW  0F
+0240:  MOVWF  FE9
+0242:  MOVF   FEF,W
+0244:  BZ    0260
+0246:  MOVLW  06
+0248:  MOVWF  01
+024A:  CLRF   00
+024C:  DECFSZ 00,F
+024E:  BRA    024C
+0250:  DECFSZ 01,F
+0252:  BRA    024A
+0254:  MOVLW  7B
+0256:  MOVWF  00
+0258:  DECFSZ 00,F
+025A:  BRA    0258
+025C:  DECFSZ FEF,F
+025E:  BRA    0246
+0260:  RETURN 0
 .................... #use rs232(baud=115200,parity=N,xmit=PIN_C6,rcv=PIN_C7,bits=8) 
+.................... #DEFINE l_1 PIN_D0 
+.................... #DEFINE l_2 PIN_D1 
+.................... #DEFINE limit_cort PIN_D2 
+.................... #DEFINE limit_sensor PIN_D3 
+.................... #DEFINE motor_pin_1 PIN_B0 
+.................... #DEFINE motor_pin_2 PIN_B1 
+.................... #DEFINE motor_pin_3 PIN_B2 
+.................... #DEFINE motor_pin_4 PIN_B3 
 ....................  
 .................... //@ Prototipos de Funciones @// 
 ....................  
@@ -94,168 +177,206 @@ CCS PCH C Compiler, Version 5.015, 5967               02-Jan-16 14:47
 .................... void sampling_ADC(void); 
 .................... void calibracion(void); 
 .................... void send_info_rs232(int16,int16,int16,int16,int16); 
-.................... void bucle_stepper_motor(void); 
+.................... int16 r_datos(void); 
+.................... int16 corte_maquina(int16); 
+.................... void motor_s(int,char,char); 
+.................... char sensor_start(void); 
 ....................  
-.................... const int stepper_motor[4] = {0x08,0x04,0x02,0x01}; 
+....................  
 ....................  
 .................... Void main() { 
 *
-01B2:  CLRF   FF8
-01B4:  BCF    FD0.7
-01B6:  BSF    FB8.3
-01B8:  MOVLW  2A
-01BA:  MOVWF  FAF
-01BC:  MOVLW  00
-01BE:  MOVWF  FB0
-01C0:  MOVLW  A6
-01C2:  MOVWF  FAC
-01C4:  MOVLW  90
-01C6:  MOVWF  FAB
-01C8:  MOVF   FC1,W
-01CA:  ANDLW  C0
-01CC:  IORLW  0F
-01CE:  MOVWF  FC1
-01D0:  MOVLW  07
-01D2:  MOVWF  FB4
+0340:  CLRF   FF8
+0342:  BCF    FD0.7
+0344:  BSF    FB8.3
+0346:  MOVLW  2A
+0348:  MOVWF  FAF
+034A:  MOVLW  00
+034C:  MOVWF  FB0
+034E:  MOVLW  A6
+0350:  MOVWF  FAC
+0352:  MOVLW  90
+0354:  MOVWF  FAB
+0356:  MOVF   FC1,W
+0358:  ANDLW  C0
+035A:  IORLW  0F
+035C:  MOVWF  FC1
+035E:  MOVLW  07
+0360:  MOVWF  FB4
 ....................   /* code */ 
 ....................  
 ....................     setup_adc_ports(AN0_TO_AN8); 
-01D4:  MOVF   FC1,W
-01D6:  ANDLW  C0
-01D8:  IORLW  06
-01DA:  MOVWF  FC1
+0362:  MOVF   FC1,W
+0364:  ANDLW  C0
+0366:  IORLW  06
+0368:  MOVWF  FC1
 ....................     setup_adc(ADC_CLOCK_DIV_2); 
-01DC:  MOVF   FC0,W
-01DE:  ANDLW  C0
-01E0:  MOVWF  FC0
-01E2:  BSF    FC0.7
-01E4:  BSF    FC2.0
+036A:  MOVF   FC0,W
+036C:  ANDLW  C0
+036E:  MOVWF  FC0
+0370:  BSF    FC0.7
+0372:  BSF    FC2.0
 ....................     while (TRUE) { 
 ....................       /* code */ 
 ....................       char opcion; 
 ....................       opcion = getc(); 
-01E6:  BTFSS  F9E.5
-01E8:  BRA    01E6
-01EA:  MOVFF  FAE,05
+0374:  BTFSS  F9E.5
+0376:  BRA    0374
+0378:  MOVFF  FAE,05
 ....................  
 ....................       switch (opcion) { 
-01EE:  MOVF   05,W
-01F0:  XORLW  78
-01F2:  BZ    01FE
-01F4:  XORLW  1B
-01F6:  BZ    0202
-01F8:  XORLW  01
-01FA:  BZ    0206
-01FC:  BRA    020A
-....................         case 'x': 
+037C:  MOVF   05,W
+037E:  XORLW  78
+0380:  BZ    0390
+0382:  XORLW  1B
+0384:  BZ    0394
+0386:  XORLW  11
+0388:  BZ    0398
+038A:  XORLW  01
+038C:  BZ    03C6
+038E:  BRA    03D6
+....................         case 'x': //ENVIA LAS LECTURAS DE LOS SENSORES 
 ....................         { 
 ....................           //printf("Enviando datos..."); 
 ....................           sampling_ADC(); 
-01FE:  BRA    0080
+0390:  BRA    006C
 ....................  
 ....................           break; 
-0200:  BRA    0222
+0392:  BRA    03EE
 ....................         } 
-....................         case 'c': 
+....................         case 'c': // CALIBRA LA MAQUINA MANDANDOLA AL ORIGEN 
 ....................         { 
 ....................           //printf("Calibrando..."); 
 ....................           calibracion(); 
-0202:  BRA    0144
+0394:  BRA    00E2
 ....................           break; 
-0204:  BRA    0222
+0396:  BRA    03EE
 ....................         } 
-....................         case 'b': 
+....................         case 'r': // RECIVE LOS DATOS DE LA PC 
 ....................         { 
-....................           bucle_stepper_motor(); 
-0206:  RCALL  011C
-....................           
+....................           int16 repeat, tiempo_motor; 
+....................           repeat = r_datos(); 
+0398:  BRA    01D8
+039A:  MOVFF  02,07
+039E:  MOVFF  01,06
+....................           for (int i = 0; i < repeat; i++) { 
+03A2:  CLRF   0A
+03A4:  MOVF   07,F
+03A6:  BNZ   03AE
+03A8:  MOVF   06,W
+03AA:  SUBWF  0A,W
+03AC:  BC    03C4
+....................  
+....................             tiempo_motor = corte_maquina(tiempo_motor); 
+03AE:  MOVFF  09,0D
+03B2:  MOVFF  08,0C
+03B6:  BRA    0262
+03B8:  MOVFF  02,09
+03BC:  MOVFF  01,08
+03C0:  INCF   0A,F
+03C2:  BRA    03A4
+....................           } 
+....................             break; 
+03C4:  BRA    03EE
+....................         } 
+....................         case 's':{ // PREPARA PARA EMPEZAR A SENSAR 
+....................           char regreso; 
+....................           regreso = sensor_start(); 
+03C6:  BRA    02F2
+03C8:  MOVFF  01,0B
+....................  
+....................           printf("%c",regreso); 
+03CC:  MOVF   0B,W
+03CE:  BTFSS  F9E.4
+03D0:  BRA    03CE
+03D2:  MOVWF  FAD
 ....................           break; 
-0208:  BRA    0222
+03D4:  BRA    03EE
 ....................         } 
 ....................         default: 
 ....................         { 
 ....................           printf("Letra No Especificada"); 
-020A:  MOVLW  18
-020C:  MOVWF  FF6
-020E:  MOVLW  00
-0210:  MOVWF  FF7
-0212:  BRA    018E
+03D6:  MOVLW  04
+03D8:  MOVWF  FF6
+03DA:  MOVLW  00
+03DC:  MOVWF  FF7
+03DE:  BRA    031C
 ....................           delay_ms(1000); 
-0214:  MOVLW  04
-0216:  MOVWF  06
-0218:  MOVLW  FA
-021A:  MOVWF  09
-021C:  RCALL  00F6
-021E:  DECFSZ 06,F
-0220:  BRA    0218
+03E0:  MOVLW  04
+03E2:  MOVWF  0C
+03E4:  MOVLW  FA
+03E6:  MOVWF  0F
+03E8:  RCALL  023C
+03EA:  DECFSZ 0C,F
+03EC:  BRA    03E4
 ....................           break; 
 ....................         } 
 ....................       } 
-0222:  BRA    01E6
+03EE:  BRA    0374
 ....................     } 
 ....................  
 .................... } 
 .................... void send_info_rs232(int16 a, int16 b, int16 c, int16 d, int16 e){ // @ Envia los datos a la computadora en forma de caracteres @// 
-0224:  SLEEP 
+03F0:  SLEEP 
 ....................       char data[10]; 
 ....................       int x; 
 ....................  
 ....................       data[0] = a; 
 *
-002E:  MOVFF  11,1B
+001A:  MOVFF  17,21
 ....................       data[1] = a>>8; 
-0032:  MOVFF  12,1C
+001E:  MOVFF  18,22
 ....................       data[2] = b; 
-0036:  MOVFF  13,1D
+0022:  MOVFF  19,23
 ....................       data[3] = b>>8; 
-003A:  MOVFF  14,1E
+0026:  MOVFF  1A,24
 ....................       data[4] = c; 
-003E:  MOVFF  15,1F
+002A:  MOVFF  1B,25
 ....................       data[5] = c>>8; 
-0042:  MOVFF  16,20
+002E:  MOVFF  1C,26
 ....................       data[6] = d; 
-0046:  MOVFF  17,21
+0032:  MOVFF  1D,27
 ....................       data[7] = d>>8; 
-004A:  MOVFF  18,22
+0036:  MOVFF  1E,28
 ....................       data[8] = e; 
-004E:  MOVFF  19,23
+003A:  MOVFF  1F,29
 ....................       data[9] = e>>8; 
-0052:  MOVFF  1A,24
+003E:  MOVFF  20,2A
 ....................  
 ....................       for(x = 0 ; x<10 ; x++){ 
-0056:  CLRF   25
-0058:  MOVF   25,W
-005A:  SUBLW  09
-005C:  BNC   007C
+0042:  CLRF   2B
+0044:  MOVF   2B,W
+0046:  SUBLW  09
+0048:  BNC   0068
 ....................  
 ....................         printf("%c",data[x]); 
-005E:  CLRF   03
-0060:  MOVF   25,W
-0062:  ADDLW  1B
-0064:  MOVWF  FE9
-0066:  MOVLW  00
-0068:  ADDWFC 03,W
-006A:  MOVWF  FEA
-006C:  MOVFF  FEF,26
-0070:  MOVF   26,W
-0072:  BTFSS  F9E.4
-0074:  BRA    0072
-0076:  MOVWF  FAD
-0078:  INCF   25,F
-007A:  BRA    0058
+004A:  CLRF   03
+004C:  MOVF   2B,W
+004E:  ADDLW  21
+0050:  MOVWF  FE9
+0052:  MOVLW  00
+0054:  ADDWFC 03,W
+0056:  MOVWF  FEA
+0058:  MOVFF  FEF,2C
+005C:  MOVF   2C,W
+005E:  BTFSS  F9E.4
+0060:  BRA    005E
+0062:  MOVWF  FAD
+0064:  INCF   2B,F
+0066:  BRA    0044
 ....................  
 ....................       } 
-007C:  GOTO   00F2 (RETURN)
+0068:  GOTO   00DE (RETURN)
 .................... } 
 .................... void sampling_ADC(){ //@ Realiza las mediciones que existan en el puerto ADC @// 
 ....................  
 ....................   int16 medicion[5]; 
 ....................  
 ....................   for(int j = 0; j <= 4; j++) 
-0080:  CLRF   10
-0082:  MOVF   10,W
-0084:  SUBLW  04
-0086:  BNC   00C8
+006C:  CLRF   16
+006E:  MOVF   16,W
+0070:  SUBLW  04
+0072:  BNC   00B4
 ....................     { 
 ....................       /*if (j==4) //Cambiar a AN8 
 ....................       { 
@@ -268,149 +389,342 @@ CCS PCH C Compiler, Version 5.015, 5967               02-Jan-16 14:47
 ....................       //else 
 ....................       //{ 
 ....................          set_adc_channel(j); 
-0088:  RLCF   10,W
-008A:  MOVWF  00
-008C:  RLCF   00,F
-008E:  MOVLW  FC
-0090:  ANDWF  00,F
-0092:  MOVF   FC2,W
-0094:  ANDLW  C3
-0096:  IORWF  00,W
-0098:  MOVWF  FC2
+0074:  RLCF   16,W
+0076:  MOVWF  00
+0078:  RLCF   00,F
+007A:  MOVLW  FC
+007C:  ANDWF  00,F
+007E:  MOVF   FC2,W
+0080:  ANDLW  C3
+0082:  IORWF  00,W
+0084:  MOVWF  FC2
 ....................          delay_us(20); 
-009A:  MOVLW  20
-009C:  MOVWF  00
-009E:  DECFSZ 00,F
-00A0:  BRA    009E
-00A2:  BRA    00A4
-00A4:  NOP   
+0086:  MOVLW  20
+0088:  MOVWF  00
+008A:  DECFSZ 00,F
+008C:  BRA    008A
+008E:  BRA    0090
+0090:  NOP   
 ....................          medicion[j] = read_adc(); 
-00A6:  BCF    FD8.0
-00A8:  RLCF   10,W
-00AA:  CLRF   03
-00AC:  ADDLW  06
-00AE:  MOVWF  FE9
-00B0:  MOVLW  00
-00B2:  ADDWFC 03,W
-00B4:  MOVWF  FEA
-00B6:  BSF    FC2.1
-00B8:  BTFSC  FC2.1
-00BA:  BRA    00B8
-00BC:  MOVFF  FC3,FEF
-00C0:  MOVFF  FC4,FEC
-00C4:  INCF   10,F
-00C6:  BRA    0082
+0092:  BCF    FD8.0
+0094:  RLCF   16,W
+0096:  CLRF   03
+0098:  ADDLW  0C
+009A:  MOVWF  FE9
+009C:  MOVLW  00
+009E:  ADDWFC 03,W
+00A0:  MOVWF  FEA
+00A2:  BSF    FC2.1
+00A4:  BTFSC  FC2.1
+00A6:  BRA    00A4
+00A8:  MOVFF  FC3,FEF
+00AC:  MOVFF  FC4,FEC
+00B0:  INCF   16,F
+00B2:  BRA    006E
 ....................         // } 
 ....................     } 
 ....................  
 ....................     send_info_rs232(medicion[0],medicion[1],medicion[2],medicion[3],medicion[4]); 
-00C8:  MOVFF  07,12
-00CC:  MOVFF  06,11
-00D0:  MOVFF  09,14
-00D4:  MOVFF  08,13
-00D8:  MOVFF  0B,16
-00DC:  MOVFF  0A,15
-00E0:  MOVFF  0D,18
-00E4:  MOVFF  0C,17
-00E8:  MOVFF  0F,1A
-00EC:  MOVFF  0E,19
-00F0:  BRA    002E
-00F2:  GOTO   0222 (RETURN)
+00B4:  MOVFF  0D,18
+00B8:  MOVFF  0C,17
+00BC:  MOVFF  0F,1A
+00C0:  MOVFF  0E,19
+00C4:  MOVFF  11,1C
+00C8:  MOVFF  10,1B
+00CC:  MOVFF  13,1E
+00D0:  MOVFF  12,1D
+00D4:  MOVFF  15,20
+00D8:  MOVFF  14,1F
+00DC:  BRA    001A
+00DE:  GOTO   03EE (RETURN)
 .................... } 
 .................... void calibracion(){ 
-*
-0144:  BSF    06.0
-0146:  BSF    06.1
+00E2:  BSF    0C.0
+00E4:  BSF    0C.1
 ....................  
 ....................     int1 limit_1 = 1,limit_2 = 1; 
 ....................     do { 
 ....................  
 ....................        if(limit_1 == 1){ 
-0148:  BTFSS  06.0
-014A:  BRA    0160
+00E6:  BTFSS  0C.0
+00E8:  BRA    00FC
 ....................          if(input(PIN_D0)){ 
-014C:  BSF    F95.0
-014E:  BTFSS  F83.0
-0150:  BRA    015A
+00EA:  BSF    F95.0
+00EC:  BTFSS  F83.0
+00EE:  BRA    00F8
 ....................            output_low(PIN_D2); 
-0152:  BCF    F95.2
-0154:  BCF    F8C.2
+00F0:  BCF    F95.2
+00F2:  BCF    F8C.2
 ....................            limit_1 = 0; 
-0156:  BCF    06.0
+00F4:  BCF    0C.0
 ....................          } 
-0158:  BRA    0160
+00F6:  BRA    00FC
 ....................          else{ 
 ....................            output_high(PIN_D2); 
-015A:  BCF    F95.2
-015C:  BSF    F8C.2
-....................            bucle_stepper_motor(); 
-015E:  RCALL  011C
+00F8:  BCF    F95.2
+00FA:  BSF    F8C.2
+....................  
 ....................          } 
 ....................        } 
 ....................        if(limit_2 == 1){ 
-0160:  BTFSS  06.1
-0162:  BRA    0176
+00FC:  BTFSS  0C.1
+00FE:  BRA    0112
 ....................          if(input(PIN_D1)){ 
-0164:  BSF    F95.1
-0166:  BTFSS  F83.1
-0168:  BRA    0172
+0100:  BSF    F95.1
+0102:  BTFSS  F83.1
+0104:  BRA    010E
 ....................            output_low(PIN_D4); 
-016A:  BCF    F95.4
-016C:  BCF    F8C.4
+0106:  BCF    F95.4
+0108:  BCF    F8C.4
 ....................            limit_2 = 0; 
-016E:  BCF    06.1
+010A:  BCF    0C.1
 ....................          } 
-0170:  BRA    0176
+010C:  BRA    0112
 ....................          else{ 
 ....................            output_high(PIN_D4); 
-0172:  BCF    F95.4
-0174:  BSF    F8C.4
+010E:  BCF    F95.4
+0110:  BSF    F8C.4
 ....................          } 
 ....................         } 
 ....................     } while((limit_1 != 0)||(limit_2 != 0)); 
-0176:  BTFSC  06.0
-0178:  BRA    0148
-017A:  BTFSC  06.1
-017C:  BRA    0148
+0112:  BTFSC  0C.0
+0114:  BRA    00E6
+0116:  BTFSC  0C.1
+0118:  BRA    00E6
 ....................  
 ....................     char end = 'c'; 
-017E:  MOVLW  63
-0180:  MOVWF  07
+011A:  MOVLW  63
+011C:  MOVWF  0D
 ....................  
 ....................     printf("%c",end); 
-0182:  MOVF   07,W
-0184:  BTFSS  F9E.4
-0186:  BRA    0184
-0188:  MOVWF  FAD
-018A:  GOTO   0222 (RETURN)
+011E:  MOVF   0D,W
+0120:  BTFSS  F9E.4
+0122:  BRA    0120
+0124:  MOVWF  FAD
+0126:  GOTO   03EE (RETURN)
 .................... } 
-.................... void bucle_stepper_motor(void){ 
-....................  
-....................     for(int i = 0 ; i<4 ; i++){ 
+.................... int16 r_datos(void){ 
+....................   printf("ya"); 
 *
-011C:  CLRF   08
-011E:  MOVF   08,W
-0120:  SUBLW  03
-0122:  BNC   0142
-....................       output_b(stepper_motor[i]); 
-0124:  CLRF   03
-0126:  MOVF   08,W
-0128:  MOVFF  FF2,09
-012C:  BCF    FF2.7
-012E:  RCALL  0004
-0130:  BTFSC  09.7
-0132:  BSF    FF2.7
-0134:  CLRF   F93
-0136:  MOVWF  F8A
-....................       delay_ms(30); 
-0138:  MOVLW  1E
-013A:  MOVWF  09
-013C:  RCALL  00F6
-013E:  INCF   08,F
-0140:  BRA    011E
-....................     } 
-0142:  RETURN 0
+01D8:  MOVLW  79
+01DA:  BTFSS  F9E.4
+01DC:  BRA    01DA
+01DE:  MOVWF  FAD
+01E0:  MOVLW  61
+01E2:  BTFSS  F9E.4
+01E4:  BRA    01E2
+01E6:  MOVWF  FAD
+....................   char bucle[2]; 
+....................   for (int i = 0; i < 2; i++) { 
+01E8:  CLRF   0E
+01EA:  MOVF   0E,W
+01EC:  SUBLW  01
+01EE:  BNC   020A
+....................     /* code */ 
+....................     bucle[i] = getc(); 
+01F0:  CLRF   03
+01F2:  MOVF   0E,W
+01F4:  ADDLW  0C
+01F6:  MOVWF  FE9
+01F8:  MOVLW  00
+01FA:  ADDWFC 03,W
+01FC:  MOVWF  FEA
+01FE:  BTFSS  F9E.5
+0200:  BRA    01FE
+0202:  MOVFF  FAE,FEF
+0206:  INCF   0E,F
+0208:  BRA    01EA
+....................   } 
+....................   int16 repeat; 
+....................   repeat = bucle[0] | bucle[1] >> 8; 
+020A:  MOVLW  00
+020C:  IORWF  0C,W
+020E:  MOVWF  0F
+0210:  CLRF   10
+....................   printf("%c",bucle[0]); 
+0212:  MOVF   0C,W
+0214:  BTFSS  F9E.4
+0216:  BRA    0214
+0218:  MOVWF  FAD
+....................   printf("%c",bucle[1]); 
+021A:  MOVF   0D,W
+021C:  BTFSS  F9E.4
+021E:  BRA    021C
+0220:  MOVWF  FAD
+....................   printf("%Lu",repeat); 
+0222:  MOVLW  10
+0224:  MOVWF  FE9
+0226:  MOVFF  10,12
+022A:  MOVFF  0F,11
+022E:  BRA    012A
+....................   return repeat; 
+0230:  MOVFF  0F,01
+0234:  MOVFF  10,02
+0238:  GOTO   039A (RETURN)
+.................... } 
+.................... int16 corte_maquina(int16){ 
 ....................  
+.................... output_toggle(PIN_D2); 
+*
+0262:  BCF    F95.2
+0264:  BTG    F8C.2
+.................... delay_ms(500); 
+0266:  MOVLW  02
+0268:  MOVWF  0E
+026A:  MOVLW  FA
+026C:  MOVWF  0F
+026E:  RCALL  023C
+0270:  DECFSZ 0E,F
+0272:  BRA    026A
+0274:  GOTO   03B8 (RETURN)
+....................  
+....................  
+....................  
+.................... } 
+.................... void motor_s(int num_motor,char estado,char direccion){ 
+....................  
+....................   switch (num_motor) { 
+0278:  MOVF   0C,W
+027A:  XORLW  01
+027C:  BZ    0284
+027E:  XORLW  03
+0280:  BZ    02BA
+0282:  BRA    02F0
+....................     case 1:{ // ELEGIR MOTOR 1 
+....................       switch (estado) { 
+0284:  MOVF   0D,W
+0286:  XORLW  49
+0288:  BZ    0290
+028A:  XORLW  06
+028C:  BZ    02B0
+028E:  BRA    02B8
+....................         case 'I':{ // SELECCIONA ON 
+....................             switch (direccion) { 
+0290:  MOVF   0E,W
+0292:  XORLW  3E
+0294:  BZ    029C
+0296:  XORLW  02
+0298:  BZ    02A6
+029A:  BRA    02AE
+....................               case '>':{ // DIRECCION ADELANTE 
+....................                 output_high(motor_pin_1); 
+029C:  BCF    F93.0
+029E:  BSF    F8A.0
+....................                 output_low(motor_pin_2); 
+02A0:  BCF    F93.1
+02A2:  BCF    F8A.1
+....................                 break; 
+02A4:  BRA    02AE
+....................               } 
+....................               case '<':{ // DIRECCION ATRAS 
+....................                 output_high(motor_pin_2); 
+02A6:  BCF    F93.1
+02A8:  BSF    F8A.1
+....................                 output_low(motor_pin_1); 
+02AA:  BCF    F93.0
+02AC:  BCF    F8A.0
+....................                 break; 
+....................               } 
+....................             } 
+....................           break; 
+02AE:  BRA    02B8
+....................         } 
+....................         case 'O':{ // SELECCIONA OFF 
+....................           output_low(motor_pin_1); 
+02B0:  BCF    F93.0
+02B2:  BCF    F8A.0
+....................           output_low(motor_pin_2); 
+02B4:  BCF    F93.1
+02B6:  BCF    F8A.1
+....................  
+....................           break; 
+....................         } 
+....................       } 
+....................       break; 
+02B8:  BRA    02F0
+....................     } 
+....................     case 2:{ // ELEGIR MOTOR 2 
+....................       switch (estado) { 
+02BA:  MOVF   0D,W
+02BC:  XORLW  49
+02BE:  BZ    02C6
+02C0:  XORLW  06
+02C2:  BZ    02E6
+02C4:  BRA    02EE
+....................         case 'I':{ // SELECCIONA ON 
+....................             switch (direccion) { 
+02C6:  MOVF   0E,W
+02C8:  XORLW  3E
+02CA:  BZ    02D2
+02CC:  XORLW  02
+02CE:  BZ    02DC
+02D0:  BRA    02E4
+....................               case '>':{ // DIRECCION ADELANTE 
+....................                 output_high(motor_pin_3); 
+02D2:  BCF    F93.2
+02D4:  BSF    F8A.2
+....................                 output_low(motor_pin_4); 
+02D6:  BCF    F93.3
+02D8:  BCF    F8A.3
+....................                 break; 
+02DA:  BRA    02E4
+....................               } 
+....................               case '<':{ // DIRECCION ATRAS 
+....................                 output_high(motor_pin_4); 
+02DC:  BCF    F93.3
+02DE:  BSF    F8A.3
+....................                 output_low(motor_pin_3); 
+02E0:  BCF    F93.2
+02E2:  BCF    F8A.2
+....................                 break; 
+....................               } 
+....................             } 
+....................           break; 
+02E4:  BRA    02EE
+....................         } 
+....................         case 'O':{ // SELECCIONA OFF 
+....................           output_low(motor_pin_3); 
+02E6:  BCF    F93.2
+02E8:  BCF    F8A.2
+....................           output_low(motor_pin_4); 
+02EA:  BCF    F93.3
+02EC:  BCF    F8A.3
+....................           break; 
+....................         } 
+....................       } 
+....................       break; 
+02EE:  BRA    02F0
+....................     } 
+....................   } 
+02F0:  RETURN 0
+.................... } 
+.................... char sensor_start(void){ 
+....................  
+....................   do { 
+....................     motor_s(1,'I','>'); 
+02F2:  MOVLW  01
+02F4:  MOVWF  0C
+02F6:  MOVLW  49
+02F8:  MOVWF  0D
+02FA:  MOVLW  3E
+02FC:  MOVWF  0E
+02FE:  RCALL  0278
+....................   } while((input(limit_sensor)) != 1); 
+0300:  BSF    F95.3
+0302:  BTFSS  F83.3
+0304:  BRA    02F2
+....................   motor_s(1,'O',' '); 
+0306:  MOVLW  01
+0308:  MOVWF  0C
+030A:  MOVLW  4F
+030C:  MOVWF  0D
+030E:  MOVLW  20
+0310:  MOVWF  0E
+0312:  RCALL  0278
+....................   return 'n'; 
+0314:  MOVLW  6E
+0316:  MOVWF  01
+0318:  GOTO   03C8 (RETURN)
 .................... } 
 
 Configuration Fuses:
