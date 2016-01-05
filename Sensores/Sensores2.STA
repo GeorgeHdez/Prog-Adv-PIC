@@ -1,0 +1,46 @@
+
+ROM used:   368/32768 (1%)
+            368/32768 (1%) including unused fragments
+
+            0.4 Average locations per line
+            9.7 Average locations per statement
+
+RAM used:   4/2048 (0%) at main() level
+            38/2048 (2%) worst case
+
+Stack used: 2 worst case (2 in main + 0 for interrupts)
+Stack size: 31
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+   90    38 100  Sensores2.c
+  837     0   0  C:\Program Files (x86)\PICC\Devices\18f4550.h
+----- -----
+  927    38 Total
+
+Page ROM  %  RAM   Vol Diff  Functions:
+---- --- --- ---   --- ----  ----------
+0     84  11    0   204  3.1  main
+0     82  11   22   700  5.1  send_info_rs232
+0    198  27   12   501  6.2  sampling_ADC
+ Inline         0   700  5.1  @cinit1
+
+Program metrics:
+    Functions               4
+    Statements              38
+    Comments                160
+    Volume (V)              2794
+    Difficulty (D)          19.8
+    Effort to implement (E) 55252
+    Time to implement (T)   51 minutes
+    Est Delivered Bugs (B)  0
+    Cyclomatic Complexity   5
+    Maintainability (MI)    82
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-00002     4  0  
+00004-07FFE   364  32400  
+
+
+

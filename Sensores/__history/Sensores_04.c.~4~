@@ -1,0 +1,16 @@
+#include <Sensores_04.h>
+
+void main()
+{
+
+   while(TRUE)
+   {
+     putc('z');
+     char mundo;
+     mundo = getc();
+     
+     putc(mundo);
+     delay_ms(1000);
+   }
+
+}

@@ -1,0 +1,5 @@
+青Sensores2
+   青main  0/84  Ram=0
+      団@cinit1  (Inline)  Ram=0
+      青sampling_ADC  0/198  Ram=12
+         青send_info_rs232  0/82  Ram=22

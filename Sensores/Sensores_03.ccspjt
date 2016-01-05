@@ -1,0 +1,20 @@
+[PROJECT]
+Target=Sensores_03.hex
+Processor_Text=PIC18F4550
+CCSVersion=5.015
+Compiler=PCH
+[Target Data]
+FileList=Sensores_03.c
+[Directories]
+Include=C:\Program Files (x86)\PICC\Devices\;C:\Program Files (x86)\PICC\Drivers\
+[Sensores_03.c]
+Type=4
+[mru-list]
+1=Sensores_03.c
+[Opened Files]
+1=Sensores_03.c
+2=Sensores_3.h
+3=
+[Units]
+Count=1
+1=Sensores_03 (main)

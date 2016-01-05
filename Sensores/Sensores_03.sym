@@ -1,0 +1,93 @@
+000     @SCRATCH
+001     @SCRATCH
+001     _RETURN_
+002     @SCRATCH
+003     @SCRATCH
+005     main.opcion
+006.0   calibracion.limit_1
+006-00F sampling_ADC.medicion
+006.1   calibracion.limit_2
+006     main.@SCRATCH1
+006     @PSTRINGC_115200_31766_31767.@SCRATCH1
+007     calibracion.end
+007     @PSTRINGC_115200_31766_31767.@SCRATCH2
+008     bucle_stepper_motor.i
+008     calibracion.@SCRATCH1
+009     @delay_ms1.P1
+009     calibracion.@SCRATCH2
+009     bucle_stepper_motor.@SCRATCH1
+010     sampling_ADC.j
+011-012 send_info_rs232.a
+011     sampling_ADC.@SCRATCH1
+012     sampling_ADC.@SCRATCH2
+013-014 send_info_rs232.b
+015-016 send_info_rs232.c
+017-018 send_info_rs232.d
+019-01A send_info_rs232.e
+01B-024 send_info_rs232.data
+025     send_info_rs232.x
+026     send_info_rs232.@SCRATCH1
+F83     PSP_DATA
+FB4.6   C1OUT
+FB4.7   C2OUT
+FBB     CCP_2
+FBB     CCP_2_LOW
+FBC     CCP_2_HIGH
+FBE     CCP_1_LOW
+FBE     CCP_1
+FBF     CCP_1_HIGH
+FE1-FE2 @READ_PACKED_MEMORY.P1
+FE1-FE2 @WRITE_PACKED_MEMORY.P2
+FE9-FEA @WRITE_PROGRAM_MEMORY.P1
+FE9-FEA @READ_PACKED_MEMORY.P2
+FE9-FEA @WRITE_PACKED_MEMORY.P3
+FE9-FEA @READ_PROGRAM_MEMORY.P4
+FF6-FF8 @READ_PROGRAM_MEMORY.P1
+FF6-FF8 @WRITE_PROGRAM_MEMORY.P2
+
+ROM Allocation:
+000004  stepper_motor.call
+000014  stepper_motor.data
+000018  @const667.call
+00002E  send_info_rs232
+000080  sampling_ADC
+0000F6  @delay_ms1
+00011C  bucle_stepper_motor
+000144  calibracion
+00018E  @PSTRINGC_115200_31766_31767
+0001B2  @cinit1
+0001B2  main
+0001D4  @cinit2
+
+Project Directory:
+    E:\padv\Sensores\
+
+Project Files:
+    Sensores_03.c                                           [02-Jan-16 14:47  CRC=5CD8734E]
+    Sensores_3.h                                            [02-Jan-16 12:33  CRC=DDF6309F]
+    C:\Program Files (x86)\PICC\Devices\18F4550.H           [12-Nov-13 14:35  CRC=5337E248]
+
+Source signature=E13E687D
+
+Units:
+    Sensores_03 (main)
+
+Compiler Settings:
+    Processor:      PIC18F4550
+    Pointer Size:   16
+    ADC Range:      0-1023
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+
+Output Files:
+    XREF file:   Sensores_03.xsym
+    Errors:      Sensores_03.err
+    Ext Symbols: Sensores_03.esym
+    INHX32:      Sensores_03.hex
+    Symbols:     Sensores_03.sym
+    List:        Sensores_03.lst
+    Debug/COFF:  Sensores_03.cof
+    Project:     Sensores_03.ccspjt
+    Call Tree:   Sensores_03.tre
+    Statistics:  Sensores_03.STA

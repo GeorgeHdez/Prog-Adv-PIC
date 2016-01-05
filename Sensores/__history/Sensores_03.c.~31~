@@ -1,0 +1,17 @@
+#include <18f4550.h>
+#device ADC = 10;
+#FUSES XT,NOPROTECT,NOLVP,NOWDT
+#use delay(clock = 20M)
+#use rs232(rcv=pin_c7,xmit=pin_c6,baud = 9600,bits=8,parity=N)
+
+void main() {
+  /* code */
+  
+  
+  while (TRUE) {
+    /* code */
+    
+    char mundo = 'g';
+    printf("%c",mundo);
+  }
+}

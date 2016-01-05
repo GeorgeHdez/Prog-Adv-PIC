@@ -1,0 +1,13 @@
+ÀÄSensores_03
+   ÀÄmain  0/116  Ram=1
+      ÃÄ@cinit1  (Inline)  Ram=0
+      ÃÄsampling_ADC  0/118  Ram=12
+      ³  ÀÄsend_info_rs232  0/82  Ram=22
+      ÃÄcalibracion  0/74  Ram=3
+      ³  ÀÄbucle_stepper_motor  0/40  Ram=1
+      ³     ÃÄ@const660  0/20  Ram=0
+      ³     ÀÄ@delay_ms1  0/38  Ram=1
+      ÃÄbucle_stepper_motor  0/40  Ram=1
+      ³  ÀÄ*
+      ÃÄ@PSTRINGC_115200_31766_31767  0/36  Ram=2
+      ÀÄ@delay_ms1  0/38  Ram=1

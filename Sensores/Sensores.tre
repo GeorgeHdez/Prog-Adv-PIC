@@ -1,0 +1,24 @@
+ÀÄSensores
+   ÀÄmain  0/86  Ram=2
+      ÃÄ@cinit1  (Inline)  Ram=0
+      ÀÄsampling_ADC  0/744  Ram=1204
+         ÃÄ@MUL1616  0/34  Ram=5
+         ÃÄ@MUL1616  0/34  Ram=5
+         ÃÄ@ITOF  0/54  Ram=2
+         ÃÄ@MUL1616  0/34  Ram=5
+         ÃÄ@MUL1616  0/34  Ram=5
+         ÃÄ@MULFF  0/246  Ram=11
+         ÃÄ@PRINTF_L32D_115200_31766_31767FPFPFR  0/478  Ram=13
+         ³  ÃÄ@MULFF  0/246  Ram=11
+         ³  ÃÄ@ADDFF  0/634  Ram=16
+         ³  ÃÄ@FTOSD  0/68  Ram=5
+         ³  ÃÄ@DIV3232  0/148  Ram=13
+         ³  ÀÄ@DIV3232  0/148  Ram=13
+         ÃÄ@MUL1616  0/34  Ram=5
+         ÃÄ@MUL1616  0/34  Ram=5
+         ÃÄ@ITOF  0/54  Ram=2
+         ÃÄ@MUL1616  0/34  Ram=5
+         ÃÄ@MUL1616  0/34  Ram=5
+         ÃÄ@MULFF  0/246  Ram=11
+         ÀÄ@PRINTF_L32D_115200_31766_31767FPFPFR  0/478  Ram=13
+            ÀÄ*

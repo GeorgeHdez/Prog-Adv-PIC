@@ -1,0 +1,20 @@
+#include <18f4550.h>
+#device ADC = 10;
+#FUSES xt,NOPROTECT,NOLVP,NOWDT
+#use delay(clock = 20M)
+#use RS232(rcv=pin_c7,xmit=pin_c6,baud = 115200,bits=8,parity=N)
+
+void main() {
+  /* code */
+  setup_adc_ports(AN0_TO_AN8);
+  setup_adc(ADC_CLOCK_DIV_4);
+
+  
+  while (TRUE) {
+    /* code */
+
+    printf("%c",getc());
+
+
+  }
+}

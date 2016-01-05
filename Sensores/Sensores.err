@@ -1,0 +1,4 @@
+>>> Warning 202 "Sensores.c" Line 13(9,13): Variable never used:   data
+      Memory usage:   ROM=8%      RAM=0% - 61%
+      0 Errors,  1 Warnings.
+Build Successful.

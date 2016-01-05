@@ -1,0 +1,52 @@
+
+ROM used:   2496/16384 (8%)
+            2496/16384 (8%) including unused fragments
+
+            2.8 Average locations per line
+            92.4 Average locations per statement
+
+RAM used:   6/2048 (0%) at main() level
+            1241/2048 (61%) worst case
+
+Stack used: 3 worst case (3 in main + 0 for interrupts)
+Stack size: 31
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+   64    27 100  Sensores.c
+  821     0   0  ..\..\..\..\Program Files (x86)\PICC\Devices\18f4550.h
+----- -----
+  885    27 Total
+
+Page ROM  %  RAM   Vol Diff  Functions:
+---- --- --- ---   --- ----  ----------
+0     86   2    2   145  2.5  main
+0    744  15 1204   789  6.8  sampling_ADC
+0     34   1    5             @MUL1616
+0     54   1    2             @ITOF
+0    246   5   11             @MULFF
+0    634  13   16             @ADDFF
+0     68   1    5             @FTOSD
+0    148   3   13             @DIV3232
+0    478  10   13             @PRINTF_L32D_115200_31766_31767FPFPFR
+ Inline         0             @cinit1
+
+Program metrics:
+    Functions               2
+    Statements              27
+    Comments                145
+    Volume (V)              1068
+    Difficulty (D)          8.5
+    Effort to implement (E) 9043
+    Time to implement (T)   8 minutes
+    Est Delivered Bugs (B)  0
+    Cyclomatic Complexity   3
+    Maintainability (MI)    125
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-00002     4  0  
+00004-07FFE  2492  30272  
+
+
+

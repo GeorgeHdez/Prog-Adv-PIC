@@ -1,0 +1,74 @@
+000     @SCRATCH
+001     @SCRATCH
+001     _RETURN_
+002     @SCRATCH
+003     @SCRATCH
+005     main.medicion
+006-00F sampling_ADC.medicion
+010     sampling_ADC.j
+011-012 send_info_rs232.a
+011     sampling_ADC.@SCRATCH1
+012     sampling_ADC.@SCRATCH2
+013-014 send_info_rs232.b
+015-016 send_info_rs232.c
+017-018 send_info_rs232.d
+019-01A send_info_rs232.e
+01B-024 send_info_rs232.data
+025     send_info_rs232.x
+026     send_info_rs232.@SCRATCH1
+F83     PSP_DATA
+FB4.6   C1OUT
+FB4.7   C2OUT
+FBB     CCP_2
+FBB     CCP_2_LOW
+FBC     CCP_2_HIGH
+FBE     CCP_1_LOW
+FBE     CCP_1
+FBF     CCP_1_HIGH
+FE1-FE2 @READ_PACKED_MEMORY.P1
+FE1-FE2 @WRITE_PACKED_MEMORY.P2
+FE9-FEA @WRITE_PACKED_MEMORY.P1
+FE9-FEA @READ_PROGRAM_MEMORY.P2
+FE9-FEA @READ_PACKED_MEMORY.P3
+FE9-FEA @WRITE_PROGRAM_MEMORY.P4
+FF6-FF8 @WRITE_PROGRAM_MEMORY.P1
+FF6-FF8 @READ_PROGRAM_MEMORY.P2
+
+ROM Allocation:
+000004  send_info_rs232
+000056  sampling_ADC
+00011C  main
+00011C  @cinit1
+00013E  @cinit2
+
+Project Directory:
+    E:\padv\Sensores\
+
+Project Files:
+    Sensores2.c                                             [26-Dec-15 20:44  CRC=B8068E54]
+    C:\Program Files (x86)\PICC\Devices\18f4550.h           [12-Nov-13 14:35  CRC=5337E248]
+
+Source signature=5E7652E4
+
+Units:
+    Sensores2 (main)
+
+Compiler Settings:
+    Processor:      PIC18F4550
+    Pointer Size:   16
+    ADC Range:      0-1023
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+
+Output Files:
+    XREF file:   Sensores2.xsym
+    Errors:      Sensores2.err
+    Ext Symbols: Sensores2.esym
+    INHX32:      Sensores2.hex
+    Symbols:     Sensores2.sym
+    List:        Sensores2.lst
+    Debug/COFF:  Sensores2.cof
+    Project:     Sensores2.ccspjt
+    Call Tree:   Sensores2.tre
+    Statistics:  Sensores2.STA

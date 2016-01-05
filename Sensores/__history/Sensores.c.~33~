@@ -1,0 +1,44 @@
+#include <18f4550.h>
+#device ADC=10
+#fuses INTRC,XT,NOPROTECT,NOWDT,NOLVP
+#use delay(CLOCK=8M)
+#use RS232(rcv=pin_c7,xmit=pin_c6,baud=115200,bits=8,parity=N)
+
+void sampling_ADC();
+
+void main()
+{
+  int16 data = 0;
+
+  //Habilitar Oscilador interno
+  setup_oscillator(OSC_8MHZ,OSC_INTRC);
+
+  //Configuración de ADC
+  setup_adc_ports(AN0_TO_AN6|VSS_VDD);
+  setup_adc(ADC_CLOCK_INTERNAL);
+
+  while(TRUE)
+  {
+     sampling_ADC();
+     printf("\n\n");
+  }
+}
+
+void sampling_ADC()
+{
+  float data[5][5];
+
+  for(int i = 0; i <= 4; i++)
+  {
+    for(int j = 0; j <= 4; j++)
+    {
+      set_adc_channel(i);
+      delay_us(50);
+      data[i][j] = read_adc();
+
+      printf("%g\t",data[j][i]);
+    }
+    delay_ms(250);
+    printf("\r\n");
+  }
+}

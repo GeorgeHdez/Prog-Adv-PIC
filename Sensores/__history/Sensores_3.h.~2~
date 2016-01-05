@@ -1,0 +1,17 @@
+//@ Instucciones de inicio @//
+#include <18F4550.H>
+#device ADC = 10
+#FUSES NOWDT,NOBROWNOUT,NOLVP,NOXINST
+#use delay(crystal = 20Mhz)
+#use rs232(baud=115200,parity=N,xmit=PIN_C6,rcv=PIN_C7,bits=8)
+
+//@ Prototipos de Funciones @//
+
+void ADC();
+void sampling_ADC(void);
+void calibracion(void);
+void send_info_rs232(int16,int16,int16,int16,int16);
+void bucle_stepper_motor(int*motor_ciclo)
+
+// Ciclo de motor a pasos
+const int *motor_ciclo[4] = {0x01,0x02,0x04,0x08};

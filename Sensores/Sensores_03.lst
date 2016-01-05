@@ -1,0 +1,423 @@
+CCS PCH C Compiler, Version 5.015, 5967               02-Jan-16 14:47
+
+               Filename:   E:\padv\Sensores\Sensores_03.lst
+
+               ROM used:   550 bytes (2%)
+                           Largest free fragment is 32218
+               RAM used:   5 (0%) at main() level
+                           38 (2%) worst case
+               Stack used: 3 locations
+               Stack size: 31
+
+*
+0000:  GOTO   01B2
+.................... #include <Sensores_3.h> 
+.................... //@ Instucciones de inicio @// 
+.................... #include <18F4550.H> 
+.................... //////////// Standard Header file for the PIC18F4550 device //////////////// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////        (C) Copyright 1996, 2013 Custom Computer Services          //// 
+.................... //// This source code may only be used by licensed users of the CCS C  //// 
+.................... //// compiler.  This source code may only be distributed to other      //// 
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction //// 
+.................... //// or distribution is permitted without written permission.          //// 
+.................... //// Derivative programs created using this software in object code    //// 
+.................... //// form are not restricted in any way.                               //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... #device PIC18F4550 
+0004:  CLRF   FF7
+0006:  ADDLW  14
+0008:  MOVWF  FF6
+000A:  MOVLW  00
+000C:  ADDWFC FF7,F
+000E:  TBLRD*+
+0010:  MOVF   FF5,W
+0012:  RETURN 0
+0014:  DATA 08,04
+0016:  DATA 02,01
+0018:  DATA 4C,65
+001A:  DATA 74,72
+001C:  DATA 61,20
+001E:  DATA 4E,6F
+0020:  DATA 20,45
+0022:  DATA 73,70
+0024:  DATA 65,63
+0026:  DATA 69,66
+0028:  DATA 69,63
+002A:  DATA 61,64
+002C:  DATA 61,00
+*
+018E:  TBLRD*+
+0190:  MOVF   FF5,F
+0192:  BZ    01AE
+0194:  MOVFF  FF6,06
+0198:  MOVFF  FF7,07
+019C:  MOVF   FF5,W
+019E:  BTFSS  F9E.4
+01A0:  BRA    019E
+01A2:  MOVWF  FAD
+01A4:  MOVFF  06,FF6
+01A8:  MOVFF  07,FF7
+01AC:  BRA    018E
+01AE:  GOTO   0214 (RETURN)
+....................  
+.................... #list 
+....................  
+.................... #device ADC = 10 
+.................... #FUSES NOWDT,NOBROWNOUT,NOLVP,NOXINST 
+.................... #use delay(crystal = 20Mhz) 
+*
+00F6:  CLRF   FEA
+00F8:  MOVLW  09
+00FA:  MOVWF  FE9
+00FC:  MOVF   FEF,W
+00FE:  BZ    011A
+0100:  MOVLW  06
+0102:  MOVWF  01
+0104:  CLRF   00
+0106:  DECFSZ 00,F
+0108:  BRA    0106
+010A:  DECFSZ 01,F
+010C:  BRA    0104
+010E:  MOVLW  7B
+0110:  MOVWF  00
+0112:  DECFSZ 00,F
+0114:  BRA    0112
+0116:  DECFSZ FEF,F
+0118:  BRA    0100
+011A:  RETURN 0
+.................... #use rs232(baud=115200,parity=N,xmit=PIN_C6,rcv=PIN_C7,bits=8) 
+....................  
+.................... //@ Prototipos de Funciones @// 
+....................  
+.................... void ADC(); 
+.................... void sampling_ADC(void); 
+.................... void calibracion(void); 
+.................... void send_info_rs232(int16,int16,int16,int16,int16); 
+.................... void bucle_stepper_motor(void); 
+....................  
+.................... const int stepper_motor[4] = {0x08,0x04,0x02,0x01}; 
+....................  
+.................... Void main() { 
+*
+01B2:  CLRF   FF8
+01B4:  BCF    FD0.7
+01B6:  BSF    FB8.3
+01B8:  MOVLW  2A
+01BA:  MOVWF  FAF
+01BC:  MOVLW  00
+01BE:  MOVWF  FB0
+01C0:  MOVLW  A6
+01C2:  MOVWF  FAC
+01C4:  MOVLW  90
+01C6:  MOVWF  FAB
+01C8:  MOVF   FC1,W
+01CA:  ANDLW  C0
+01CC:  IORLW  0F
+01CE:  MOVWF  FC1
+01D0:  MOVLW  07
+01D2:  MOVWF  FB4
+....................   /* code */ 
+....................  
+....................     setup_adc_ports(AN0_TO_AN8); 
+01D4:  MOVF   FC1,W
+01D6:  ANDLW  C0
+01D8:  IORLW  06
+01DA:  MOVWF  FC1
+....................     setup_adc(ADC_CLOCK_DIV_2); 
+01DC:  MOVF   FC0,W
+01DE:  ANDLW  C0
+01E0:  MOVWF  FC0
+01E2:  BSF    FC0.7
+01E4:  BSF    FC2.0
+....................     while (TRUE) { 
+....................       /* code */ 
+....................       char opcion; 
+....................       opcion = getc(); 
+01E6:  BTFSS  F9E.5
+01E8:  BRA    01E6
+01EA:  MOVFF  FAE,05
+....................  
+....................       switch (opcion) { 
+01EE:  MOVF   05,W
+01F0:  XORLW  78
+01F2:  BZ    01FE
+01F4:  XORLW  1B
+01F6:  BZ    0202
+01F8:  XORLW  01
+01FA:  BZ    0206
+01FC:  BRA    020A
+....................         case 'x': 
+....................         { 
+....................           //printf("Enviando datos..."); 
+....................           sampling_ADC(); 
+01FE:  BRA    0080
+....................  
+....................           break; 
+0200:  BRA    0222
+....................         } 
+....................         case 'c': 
+....................         { 
+....................           //printf("Calibrando..."); 
+....................           calibracion(); 
+0202:  BRA    0144
+....................           break; 
+0204:  BRA    0222
+....................         } 
+....................         case 'b': 
+....................         { 
+....................           bucle_stepper_motor(); 
+0206:  RCALL  011C
+....................           
+....................           break; 
+0208:  BRA    0222
+....................         } 
+....................         default: 
+....................         { 
+....................           printf("Letra No Especificada"); 
+020A:  MOVLW  18
+020C:  MOVWF  FF6
+020E:  MOVLW  00
+0210:  MOVWF  FF7
+0212:  BRA    018E
+....................           delay_ms(1000); 
+0214:  MOVLW  04
+0216:  MOVWF  06
+0218:  MOVLW  FA
+021A:  MOVWF  09
+021C:  RCALL  00F6
+021E:  DECFSZ 06,F
+0220:  BRA    0218
+....................           break; 
+....................         } 
+....................       } 
+0222:  BRA    01E6
+....................     } 
+....................  
+.................... } 
+.................... void send_info_rs232(int16 a, int16 b, int16 c, int16 d, int16 e){ // @ Envia los datos a la computadora en forma de caracteres @// 
+0224:  SLEEP 
+....................       char data[10]; 
+....................       int x; 
+....................  
+....................       data[0] = a; 
+*
+002E:  MOVFF  11,1B
+....................       data[1] = a>>8; 
+0032:  MOVFF  12,1C
+....................       data[2] = b; 
+0036:  MOVFF  13,1D
+....................       data[3] = b>>8; 
+003A:  MOVFF  14,1E
+....................       data[4] = c; 
+003E:  MOVFF  15,1F
+....................       data[5] = c>>8; 
+0042:  MOVFF  16,20
+....................       data[6] = d; 
+0046:  MOVFF  17,21
+....................       data[7] = d>>8; 
+004A:  MOVFF  18,22
+....................       data[8] = e; 
+004E:  MOVFF  19,23
+....................       data[9] = e>>8; 
+0052:  MOVFF  1A,24
+....................  
+....................       for(x = 0 ; x<10 ; x++){ 
+0056:  CLRF   25
+0058:  MOVF   25,W
+005A:  SUBLW  09
+005C:  BNC   007C
+....................  
+....................         printf("%c",data[x]); 
+005E:  CLRF   03
+0060:  MOVF   25,W
+0062:  ADDLW  1B
+0064:  MOVWF  FE9
+0066:  MOVLW  00
+0068:  ADDWFC 03,W
+006A:  MOVWF  FEA
+006C:  MOVFF  FEF,26
+0070:  MOVF   26,W
+0072:  BTFSS  F9E.4
+0074:  BRA    0072
+0076:  MOVWF  FAD
+0078:  INCF   25,F
+007A:  BRA    0058
+....................  
+....................       } 
+007C:  GOTO   00F2 (RETURN)
+.................... } 
+.................... void sampling_ADC(){ //@ Realiza las mediciones que existan en el puerto ADC @// 
+....................  
+....................   int16 medicion[5]; 
+....................  
+....................   for(int j = 0; j <= 4; j++) 
+0080:  CLRF   10
+0082:  MOVF   10,W
+0084:  SUBLW  04
+0086:  BNC   00C8
+....................     { 
+....................       /*if (j==4) //Cambiar a AN8 
+....................       { 
+....................          j=8; 
+....................          set_adc_channel(j); 
+....................          delay_us(20); 
+....................          medicion[j-4] = read_adc(); 
+....................       } 
+....................       */ 
+....................       //else 
+....................       //{ 
+....................          set_adc_channel(j); 
+0088:  RLCF   10,W
+008A:  MOVWF  00
+008C:  RLCF   00,F
+008E:  MOVLW  FC
+0090:  ANDWF  00,F
+0092:  MOVF   FC2,W
+0094:  ANDLW  C3
+0096:  IORWF  00,W
+0098:  MOVWF  FC2
+....................          delay_us(20); 
+009A:  MOVLW  20
+009C:  MOVWF  00
+009E:  DECFSZ 00,F
+00A0:  BRA    009E
+00A2:  BRA    00A4
+00A4:  NOP   
+....................          medicion[j] = read_adc(); 
+00A6:  BCF    FD8.0
+00A8:  RLCF   10,W
+00AA:  CLRF   03
+00AC:  ADDLW  06
+00AE:  MOVWF  FE9
+00B0:  MOVLW  00
+00B2:  ADDWFC 03,W
+00B4:  MOVWF  FEA
+00B6:  BSF    FC2.1
+00B8:  BTFSC  FC2.1
+00BA:  BRA    00B8
+00BC:  MOVFF  FC3,FEF
+00C0:  MOVFF  FC4,FEC
+00C4:  INCF   10,F
+00C6:  BRA    0082
+....................         // } 
+....................     } 
+....................  
+....................     send_info_rs232(medicion[0],medicion[1],medicion[2],medicion[3],medicion[4]); 
+00C8:  MOVFF  07,12
+00CC:  MOVFF  06,11
+00D0:  MOVFF  09,14
+00D4:  MOVFF  08,13
+00D8:  MOVFF  0B,16
+00DC:  MOVFF  0A,15
+00E0:  MOVFF  0D,18
+00E4:  MOVFF  0C,17
+00E8:  MOVFF  0F,1A
+00EC:  MOVFF  0E,19
+00F0:  BRA    002E
+00F2:  GOTO   0222 (RETURN)
+.................... } 
+.................... void calibracion(){ 
+*
+0144:  BSF    06.0
+0146:  BSF    06.1
+....................  
+....................     int1 limit_1 = 1,limit_2 = 1; 
+....................     do { 
+....................  
+....................        if(limit_1 == 1){ 
+0148:  BTFSS  06.0
+014A:  BRA    0160
+....................          if(input(PIN_D0)){ 
+014C:  BSF    F95.0
+014E:  BTFSS  F83.0
+0150:  BRA    015A
+....................            output_low(PIN_D2); 
+0152:  BCF    F95.2
+0154:  BCF    F8C.2
+....................            limit_1 = 0; 
+0156:  BCF    06.0
+....................          } 
+0158:  BRA    0160
+....................          else{ 
+....................            output_high(PIN_D2); 
+015A:  BCF    F95.2
+015C:  BSF    F8C.2
+....................            bucle_stepper_motor(); 
+015E:  RCALL  011C
+....................          } 
+....................        } 
+....................        if(limit_2 == 1){ 
+0160:  BTFSS  06.1
+0162:  BRA    0176
+....................          if(input(PIN_D1)){ 
+0164:  BSF    F95.1
+0166:  BTFSS  F83.1
+0168:  BRA    0172
+....................            output_low(PIN_D4); 
+016A:  BCF    F95.4
+016C:  BCF    F8C.4
+....................            limit_2 = 0; 
+016E:  BCF    06.1
+....................          } 
+0170:  BRA    0176
+....................          else{ 
+....................            output_high(PIN_D4); 
+0172:  BCF    F95.4
+0174:  BSF    F8C.4
+....................          } 
+....................         } 
+....................     } while((limit_1 != 0)||(limit_2 != 0)); 
+0176:  BTFSC  06.0
+0178:  BRA    0148
+017A:  BTFSC  06.1
+017C:  BRA    0148
+....................  
+....................     char end = 'c'; 
+017E:  MOVLW  63
+0180:  MOVWF  07
+....................  
+....................     printf("%c",end); 
+0182:  MOVF   07,W
+0184:  BTFSS  F9E.4
+0186:  BRA    0184
+0188:  MOVWF  FAD
+018A:  GOTO   0222 (RETURN)
+.................... } 
+.................... void bucle_stepper_motor(void){ 
+....................  
+....................     for(int i = 0 ; i<4 ; i++){ 
+*
+011C:  CLRF   08
+011E:  MOVF   08,W
+0120:  SUBLW  03
+0122:  BNC   0142
+....................       output_b(stepper_motor[i]); 
+0124:  CLRF   03
+0126:  MOVF   08,W
+0128:  MOVFF  FF2,09
+012C:  BCF    FF2.7
+012E:  RCALL  0004
+0130:  BTFSC  09.7
+0132:  BSF    FF2.7
+0134:  CLRF   F93
+0136:  MOVWF  F8A
+....................       delay_ms(30); 
+0138:  MOVLW  1E
+013A:  MOVWF  09
+013C:  RCALL  00F6
+013E:  INCF   08,F
+0140:  BRA    011E
+....................     } 
+0142:  RETURN 0
+....................  
+.................... } 
+
+Configuration Fuses:
+   Word  1: CC04   PLL5 CPUDIV1 NOUSBDIV HS FCMEN IESO
+   Word  2: 1E38   PUT NOBROWNOUT BORV21 VREGEN NOWDT WDT32768
+   Word  3: 8700   CCP2C1 PBADEN LPT1OSC MCLR
+   Word  4: 00A1   STVREN NOLVP ICSP2 NOXINST NODEBUG
+   Word  5: C00F   NOPROTECT NOCPB NOCPD
+   Word  6: E00F   NOWRT NOWRTC NOWRTB NOWRTD
+   Word  7: 400F   NOEBTR NOEBTRB
