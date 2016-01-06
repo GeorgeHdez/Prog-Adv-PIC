@@ -27,13 +27,11 @@ Void main() {
         }
         case 'r': // RECIVE LOS DATOS DE LA PC
         {
-          int repeat;
+          int16 repeat, tiempo_motor;
           repeat = r_datos();
-          cut_start();
-          output_b(0x00);
           for (int i = 0; i < repeat; i++) {
-           corte_maquina();
-           output_b(0x00);
+
+            tiempo_motor = corte_maquina(tiempo_motor);
           }
             break;
         }
@@ -120,7 +118,7 @@ void calibracion(){
            limit_2 = 0;
          }
          else{
-           motor_s(2,'I','<');
+           motor_s(2,'I','<')
          }
         }
     } while((limit_1 != 0)||(limit_2 != 0));
@@ -129,21 +127,22 @@ void calibracion(){
 
     printf("%c",end);
 }
-int r_datos(void){
-  char bucle;
-    bucle = getc();
-    return bucle;
+int16 r_datos(void){
+  printf("ya");
+  char bucle[2];
+  for (int i = 0; i < 2; i++) {
+    /* code */
+    bucle[i] = getc();
+  }
+  int16 repeat;
+  repeat = bucle[0] | bucle[1] << 8;
+  return repeat;
 }
-void corte_maquina(void){
+int16 corte_maquina(int16){
 
-output_high(PIN_B0);
+output_toggle(PIN_B0);
 delay_ms(500);
-output_high(PIN_B1);
-delay_ms(500);
-output_high(PIN_B2);
-delay_ms(500);
-output_high(PIN_B3);
-delay_ms(500);
+
 
 
 }
@@ -210,11 +209,4 @@ char sensor_start(void){
   } while((input(limit_sensor)) != 1);
   motor_s(1,'O',' ');
   return 'n';
-}
-void cut_start(void){
-
-  do {
-    motor_s(1,'I','<');
-  } while((input(l_1)) != 1);
-   motor_s(1,'O',' ');
 }

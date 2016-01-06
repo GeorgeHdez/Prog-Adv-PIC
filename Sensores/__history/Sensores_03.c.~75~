@@ -27,13 +27,11 @@ Void main() {
         }
         case 'r': // RECIVE LOS DATOS DE LA PC
         {
-          int repeat;
+          int repeat, tiempo_motor = 2;
           repeat = r_datos();
-          cut_start();
-          output_b(0x00);
           for (int i = 0; i < repeat; i++) {
-           corte_maquina();
-           output_b(0x00);
+
+           corte_maquina(tiempo_motor);
           }
             break;
         }
@@ -132,18 +130,16 @@ void calibracion(){
 int r_datos(void){
   char bucle;
     bucle = getc();
-    return bucle;
+  }
+
+  return bucle;
 }
-void corte_maquina(void){
+void corte_maquina(int16 x){
 
 output_high(PIN_B0);
-delay_ms(500);
-output_high(PIN_B1);
-delay_ms(500);
-output_high(PIN_B2);
-delay_ms(500);
-output_high(PIN_B3);
-delay_ms(500);
+delay_ms(1000);
+output_low(PIN_B0);
+
 
 
 }
@@ -210,11 +206,4 @@ char sensor_start(void){
   } while((input(limit_sensor)) != 1);
   motor_s(1,'O',' ');
   return 'n';
-}
-void cut_start(void){
-
-  do {
-    motor_s(1,'I','<');
-  } while((input(l_1)) != 1);
-   motor_s(1,'O',' ');
 }

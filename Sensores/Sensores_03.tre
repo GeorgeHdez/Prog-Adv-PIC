@@ -1,12 +1,21 @@
 ÀÄSensores_03
-   ÀÄmain  0/178  Ram=1
+   ÀÄmain  0/164  Ram=1
       ÃÄ@cinit1  (Inline)  Ram=0
       ÃÄsampling_ADC  0/118  Ram=12
       ³  ÀÄsend_info_rs232  0/82  Ram=22
-      ÃÄcalibracion  0/72  Ram=3
-      ÃÄr_datos  0/100  Ram=2
-      ³  ÀÄ@PRINTF_LU_115200_31766_31767  0/174  Ram=9
-      ÃÄcorte_maquina  0/22  Ram=3
+      ÃÄcalibracion  0/112  Ram=3
+      ³  ÃÄmotor_s  0/122  Ram=3
+      ³  ÃÄmotor_s  0/122  Ram=3
+      ³  ÃÄmotor_s  0/122  Ram=3
+      ³  ÀÄmotor_s  0/122  Ram=3
+      ÃÄr_datos  0/16  Ram=1
+      ÃÄcut_start  0/38  Ram=1
+      ³  ÃÄmotor_s  0/122  Ram=3
+      ³  ÀÄmotor_s  0/122  Ram=3
+      ÃÄcorte_maquina  0/76  Ram=1
+      ³  ÃÄ@delay_ms1  0/38  Ram=1
+      ³  ÃÄ@delay_ms1  0/38  Ram=1
+      ³  ÃÄ@delay_ms1  0/38  Ram=1
       ³  ÀÄ@delay_ms1  0/38  Ram=1
       ÃÄsensor_start  0/42  Ram=1
       ³  ÃÄmotor_s  0/122  Ram=3

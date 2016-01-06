@@ -4,50 +4,37 @@
 002     @SCRATCH
 003     @SCRATCH
 005     main.opcion
-006-007 main.repeat
-008-009 main.tiempo_motor
-00A     main.i
-00B     main.regreso
-00C     motor_s.num_motor
-00C-00D r_datos.bucle
-00C-015 sampling_ADC.medicion
-00C.0   calibracion.limit_1
-00C-00D corte_maquina.P1
-00C.1   calibracion.limit_2
-00C     main.@SCRATCH1
-00C     @PSTRINGC_115200_31766_31767.@SCRATCH1
-00C     sensor_start.@SCRATCH1
-00D     calibracion.end
-00D     motor_s.estado
-00D     @PSTRINGC_115200_31766_31767.@SCRATCH2
-00E     motor_s.direccion
-00E     r_datos.i
-00E     calibracion.@SCRATCH1
-00E     corte_maquina.@SCRATCH1
-00F     @delay_ms1.P1
-00F-010 r_datos.repeat
-00F     calibracion.@SCRATCH2
-011-012 @PRINTF_LU_115200_31766_31767.P1
-011     r_datos.@SCRATCH1
-012     r_datos.@SCRATCH2
-013     @PRINTF_LU_115200_31766_31767.@SCRATCH1
-014     @PRINTF_LU_115200_31766_31767.@SCRATCH2
-015     @PRINTF_LU_115200_31766_31767.@SCRATCH3
-016     sampling_ADC.j
-016     @PRINTF_LU_115200_31766_31767.@SCRATCH4
-017-018 send_info_rs232.a
-017     sampling_ADC.@SCRATCH1
-017     @PRINTF_LU_115200_31766_31767.@SCRATCH5
-018     sampling_ADC.@SCRATCH2
-018     @PRINTF_LU_115200_31766_31767.@SCRATCH6
-019-01A send_info_rs232.b
-019     @PRINTF_LU_115200_31766_31767.@SCRATCH7
-01B-01C send_info_rs232.c
-01D-01E send_info_rs232.d
-01F-020 send_info_rs232.e
-021-02A send_info_rs232.data
-02B     send_info_rs232.x
-02C     send_info_rs232.@SCRATCH1
+006     main.repeat
+007     main.i
+008     main.regreso
+009     r_datos.bucle
+009-012 sampling_ADC.medicion
+009.0   calibracion.limit_1
+009.1   calibracion.limit_2
+009     main.@SCRATCH1
+009     @PSTRINGC_115200_31766_31767.@SCRATCH1
+009     corte_maquina.@SCRATCH1
+009     sensor_start.@SCRATCH1
+009     cut_start.@SCRATCH1
+00A     calibracion.end
+00A     @delay_ms1.P1
+00A     @PSTRINGC_115200_31766_31767.@SCRATCH2
+00B     motor_s.num_motor
+00B     calibracion.@SCRATCH1
+00C     motor_s.estado
+00C     calibracion.@SCRATCH2
+00D     motor_s.direccion
+013     sampling_ADC.j
+014-015 send_info_rs232.a
+014     sampling_ADC.@SCRATCH1
+015     sampling_ADC.@SCRATCH2
+016-017 send_info_rs232.b
+018-019 send_info_rs232.c
+01A-01B send_info_rs232.d
+01C-01D send_info_rs232.e
+01E-027 send_info_rs232.data
+028     send_info_rs232.x
+029     send_info_rs232.@SCRATCH1
 F83     PSP_DATA
 FB4.6   C1OUT
 FB4.7   C2OUT
@@ -59,38 +46,38 @@ FBE     CCP_1
 FBF     CCP_1_HIGH
 FE1-FE2 @WRITE_PACKED_MEMORY.P1
 FE1-FE2 @READ_PACKED_MEMORY.P2
-FE9-FEA @READ_PACKED_MEMORY.P1
-FE9-FEA @WRITE_PACKED_MEMORY.P2
-FE9-FEA @WRITE_PROGRAM_MEMORY.P3
-FE9-FEA @READ_PROGRAM_MEMORY.P4
+FE9-FEA @READ_PROGRAM_MEMORY.P1
+FE9-FEA @WRITE_PROGRAM_MEMORY.P2
+FE9-FEA @READ_PACKED_MEMORY.P3
+FE9-FEA @WRITE_PACKED_MEMORY.P4
 FF6-FF8 @READ_PROGRAM_MEMORY.P1
 FF6-FF8 @WRITE_PROGRAM_MEMORY.P2
 
 ROM Allocation:
-000004  @const676.call
+000004  @const675.call
 00001A  send_info_rs232
 00006C  sampling_ADC
-0000E2  calibracion
-00012A  @PRINTF_LU_115200_31766_31767
-0001D8  r_datos
-00023C  @delay_ms1
-000262  corte_maquina
-000278  motor_s
-0002F2  sensor_start
-00031C  @PSTRINGC_115200_31766_31767
-000340  main
-000340  @cinit1
-000362  @cinit2
+0000E2  motor_s
+00015C  calibracion
+0001CC  r_datos
+0001DC  cut_start
+000202  @delay_ms1
+000228  corte_maquina
+000274  sensor_start
+00029E  @PSTRINGC_115200_31766_31767
+0002C2  @cinit1
+0002C2  main
+0002E4  @cinit2
 
 Project Directory:
     E:\Git-Hub\Prog-Adv-PIC\Sensores\
 
 Project Files:
-    Sensores_03.c                                           [05-Jan-16 17:11  CRC=293AD23F]
-    Sensores_3.h                                            [05-Jan-16 15:36  CRC=C015D6EA]
+    Sensores_03.c                                           [05-Jan-16 21:01  CRC=09DB4FDF]
+    Sensores_3.h                                            [05-Jan-16 20:21  CRC=C015D6EA]
     C:\Program Files (x86)\PICC\Devices\18F4550.H           [12-Nov-13 14:35  CRC=5337E248]
 
-Source signature=8FC06DB9
+Source signature=7060EB59
 
 Units:
     Sensores_03 (main)
