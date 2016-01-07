@@ -3,7 +3,7 @@
 
 Void main() {
   /* code */
-    setup_oscillator(OSC_8MHZ|OSC_INTRC);
+
     setup_adc_ports(AN0_TO_AN8);
     setup_adc(ADC_CLOCK_DIV_2);
     while (TRUE) {
@@ -51,6 +51,15 @@ Void main() {
         case 'o':{
           motor_s(1,'O',' ');
         }
+        case 'q':{
+        
+         motor_s(1,'I','>');
+         break;
+        }
+        case 'w':{
+        motor_s(1,'I','<');
+        break;
+        }
         default:
         {
           printf("Letra No Especificada");
@@ -62,7 +71,7 @@ Void main() {
 
 }
 void send_info_rs232(int16 a, int16 b, int16 c, int16 d, int16 e){ // @ Envia los datos a la computadora en forma de caracteres @//
-      unsigned char data[10];
+      char data[10];
       int x;
 
       data[0] = a;
@@ -87,22 +96,22 @@ void sampling_ADC(){ //@ Realiza las mediciones que existan en el puerto ADC @//
   int16 medicion[5];
 
   for(int j = 0; j <= 4; j++)
-   {/*
-      if (j==4) //Cambiar a AN8
+    {
+      /*if (j==4) //Cambiar a AN8
       {
          j=8;
          set_adc_channel(j);
          delay_us(20);
          medicion[j-4] = read_adc();
       }
-
-      else
-      {*/
+      */
+      //else
+      //{
          set_adc_channel(j);
          delay_us(20);
          medicion[j] = read_adc();
-        }
-  //  }
+        // }
+    }
 
     send_info_rs232(medicion[0],medicion[1],medicion[2],medicion[3],medicion[4]);
 }

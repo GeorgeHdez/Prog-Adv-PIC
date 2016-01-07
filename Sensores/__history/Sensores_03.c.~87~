@@ -3,7 +3,7 @@
 
 Void main() {
   /* code */
-    setup_oscillator(OSC_8MHZ|OSC_INTRC);
+
     setup_adc_ports(AN0_TO_AN8);
     setup_adc(ADC_CLOCK_DIV_2);
     while (TRUE) {
@@ -28,23 +28,22 @@ Void main() {
         case 'r': // RECIVE LOS DATOS DE LA PC
         {
           int repeat ;
-          int32 time_motor;
-          int32 milimetro = 2000;
+          int16 time_motor,
+          int16 milimetro = 2000;
           r_datos(&repeat,&time_motor);
           cut_start(time_motor);
           output_b(0x00);
-          on_cortadora();
           for (int i = 0; i < repeat; i++) {
            corte_maquina(milimetro);
           }
           motor_s(1,'O',' ');
           motor_s(2,'O',' ');
-          off_cortadora();
           break;
         }
         case 's':{ // PREPARA PARA EMPEZAR A SENSAR
           char regreso;
           regreso = sensor_start();
+
           printf("%c",regreso);
           break;
         }
@@ -62,7 +61,7 @@ Void main() {
 
 }
 void send_info_rs232(int16 a, int16 b, int16 c, int16 d, int16 e){ // @ Envia los datos a la computadora en forma de caracteres @//
-      unsigned char data[10];
+      char data[10];
       int x;
 
       data[0] = a;
@@ -87,22 +86,22 @@ void sampling_ADC(){ //@ Realiza las mediciones que existan en el puerto ADC @//
   int16 medicion[5];
 
   for(int j = 0; j <= 4; j++)
-   {/*
-      if (j==4) //Cambiar a AN8
+    {
+      /*if (j==4) //Cambiar a AN8
       {
          j=8;
          set_adc_channel(j);
          delay_us(20);
          medicion[j-4] = read_adc();
       }
-
-      else
-      {*/
+      */
+      //else
+      //{
          set_adc_channel(j);
          delay_us(20);
          medicion[j] = read_adc();
-        }
-  //  }
+        // }
+    }
 
     send_info_rs232(medicion[0],medicion[1],medicion[2],medicion[3],medicion[4]);
 }
@@ -136,13 +135,13 @@ void calibracion(){
 
     printf("%c",end);
 }
-void r_datos(int *repeat, int32 *time_motor){
-  char bucle[2];
-    for (int i = 0; i < 2;  i++) {
+void r_datos(int *repeat, int16 *time_motor){
+  char bucle[3];
+    for (int i = 0; i < 3;  i++) {
       bucle[i] = getc();
     }
     *repeat = bucle[0];
-    *time_motor = bucle[1];
+    *time_motor = bucle[1] | bucle[2] << 8;
 }
 void corte_maquina(int32 times){
   do {
@@ -226,21 +225,13 @@ char sensor_start(void){
   return 'n';
 }
 void cut_start(int16 time_motor){
-  int avance_motor = 400;
+
   do {
     motor_s(1,'I','<');
   } while((input(l_1)) != 1);
    motor_s(1,'O',' ');
    motor_s(2,'I','V');
-   delay_ms(time_motor * avance_motor);
+   delay_ms(time_motor);
    motor_s(2,'O',' ');
 
-}
-void on_cortadora(void){
-
-  output_high(PIN_B4);
-}
-void off_cortadora(void){
-
-  output_low(PIN_B4);
 }
