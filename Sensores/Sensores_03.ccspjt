@@ -13,8 +13,9 @@ Type=4
 1=Sensores_03.c
 [Opened Files]
 1=Sensores_03.c
-2=
-3=
+2=Sensores_3.h
+3=C:\Program Files (x86)\PICC\Devices\18F4550.H
+4=
 [Units]
 Count=1
 1=Sensores_03 (main)

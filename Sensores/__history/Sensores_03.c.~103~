@@ -54,7 +54,7 @@ Void main() {
           break;
         }
         case 'm':{
-        unsigned char mundo = 0xff;
+        unsigned char mundo = 0x8f;
         printf("%c",mundo);
         break;
         }

@@ -1,59 +1,59 @@
 
-ROM used:   1308/32768 (4%)
-            1308/32768 (4%) including unused fragments
+ROM used:   1330/32768 (4%)
+            1330/32768 (4%) including unused fragments
 
             1.2 Average locations per line
-            9.0 Average locations per statement
+            8.9 Average locations per statement
 
 RAM used:   6/2048 (0%) at main() level
-            49/2048 (2%) worst case
+            50/2048 (2%) worst case
 
 Stack used: 2 worst case (2 in main + 0 for interrupts)
 Stack size: 31
 
 Lines Stmts  %   Files
 ----- ----- ---  -----
-  247   145 100  Sensores_03.c
+  254   150 100  Sensores_03.c
    29     0   0  Sensores_3.h
   837     0   0  C:\Program Files (x86)\PICC\Devices\18F4550.H
 ----- -----
- 1113   145 Total
+ 1120   150 Total
 
 Page ROM  %  RAM   Vol Diff  Functions:
 ---- --- --- ---   --- ----  ----------
 0     38   1    1             @delay_ms1
-0    288  11    2  1134  8.0  main
-0     22   1    0             @const683
-0     36   1    2             @PSTRINGC_115200_31766_31767
+0    310  12    2  1298  8.1  main
+0     22   1    0             @const685
+0     36   1    2    21  0.9  @PSTRINGC_115200_31766_31767
 0     82   3   22   709  5.1  send_info_rs232
-0    118   5   12   304  4.2  sampling_ADC
+0    118   4   12   304  4.2  sampling_ADC
 0    112   4    3   609  5.6  calibracion
 0     78   3    8   247  4.8  r_datos
 0    200   8    9   578  3.8  corte_maquina
 0    122   5    3   794  3.9  motor_s
 0     42   2    1   149  3.5  sensor_start
-0    118   5    6   304  4.2  cut_start
-0     32   1    5             @MUL1616
+0    118   4    6   304  4.2  cut_start
+0     32   1    5    21  0.9  @MUL1616
 0      8   0    0    21  0.9  on_cortadora
 0      8   0    0    21  0.9  off_cortadora
  Inline         0             @cinit1
 
 Program metrics:
-    Functions               11
-    Statements              145
+    Functions               13
+    Statements              150
     Comments                186
-    Volume (V)              7525
-    Difficulty (D)          45.3
-    Effort to implement (E) 341240
-    Time to implement (T)   5 hours, 16 minutes
+    Volume (V)              7900
+    Difficulty (D)          48.2
+    Effort to implement (E) 380468
+    Time to implement (T)   5 hours, 52 minutes
     Est Delivered Bugs (B)  2
-    Cyclomatic Complexity   29
-    Maintainability (MI)    99
+    Cyclomatic Complexity   30
+    Maintainability (MI)    77
 
  Segment     Used  Free
 -----------  ----  ----
 00000-00002     4  0  
-00004-07FFE  1304  31460  
+00004-07FFE  1326  31438  
 
 
 

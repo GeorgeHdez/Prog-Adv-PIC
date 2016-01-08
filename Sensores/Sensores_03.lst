@@ -1,11 +1,11 @@
-CCS PCH C Compiler, Version 5.015, 5967               07-Jan-16 14:33
+CCS PCH C Compiler, Version 5.015, 5967               07-Jan-16 22:20
 
                Filename:   E:\Git-Hub\Prog-Adv-PIC\Sensores\Sensores_03.lst
 
-               ROM used:   1308 bytes (4%)
-                           Largest free fragment is 31460
+               ROM used:   1330 bytes (4%)
+                           Largest free fragment is 31438
                RAM used:   6 (0%) at main() level
-                           49 (2%) worst case
+                           50 (2%) worst case
                Stack used: 2 locations
                Stack size: 31
 
@@ -37,15 +37,15 @@ CCS PCH C Compiler, Version 5.015, 5967               07-Jan-16 14:33
 0016:  DATA 61,64
 0018:  DATA 61,00
 *
-021A:  MOVF   16,W
-021C:  MULWF  18
+021A:  MOVF   17,W
+021C:  MULWF  19
 021E:  MOVFF  FF3,01
 0222:  MOVFF  FF4,00
-0226:  MULWF  19
+0226:  MULWF  1A
 0228:  MOVF   FF3,W
 022A:  ADDWF  00,F
-022C:  MOVF   17,W
-022E:  MULWF  18
+022C:  MOVF   18,W
+022E:  MULWF  19
 0230:  MOVF   FF3,W
 0232:  ADDWFC 00,W
 0234:  MOVWF  02
@@ -54,16 +54,16 @@ CCS PCH C Compiler, Version 5.015, 5967               07-Jan-16 14:33
 03D8:  TBLRD*+
 03DA:  MOVF   FF5,F
 03DC:  BZ    03F8
-03DE:  MOVFF  FF6,11
-03E2:  MOVFF  FF7,12
+03DE:  MOVFF  FF6,12
+03E2:  MOVFF  FF7,13
 03E6:  MOVF   FF5,W
 03E8:  BTFSS  F9E.4
 03EA:  BRA    03E8
 03EC:  MOVWF  FAD
-03EE:  MOVFF  11,FF6
-03F2:  MOVFF  12,FF7
+03EE:  MOVFF  12,FF6
+03F2:  MOVFF  13,FF7
 03F6:  BRA    03D8
-03F8:  GOTO   050A (RETURN)
+03F8:  GOTO   0520 (RETURN)
 ....................  
 .................... #list 
 ....................  
@@ -72,7 +72,7 @@ CCS PCH C Compiler, Version 5.015, 5967               07-Jan-16 14:33
 .................... #use delay(internal = 8Mhz) 
 *
 023A:  CLRF   FEA
-023C:  MOVLW  1A
+023C:  MOVLW  1B
 023E:  MOVWF  FE9
 0240:  MOVF   FEF,W
 0242:  BZ    025E
@@ -148,215 +148,233 @@ CCS PCH C Compiler, Version 5.015, 5967               07-Jan-16 14:33
 042C:  ANDLW  C0
 042E:  IORLW  06
 0430:  MOVWF  FC1
-....................     setup_adc(ADC_CLOCK_DIV_2); 
+....................     setup_adc(ADC_CLOCK_INTERNAL); 
 0432:  MOVF   FC0,W
 0434:  ANDLW  C0
-0436:  MOVWF  FC0
-0438:  BSF    FC0.7
-043A:  BSF    FC2.0
+0436:  IORLW  07
+0438:  MOVWF  FC0
+043A:  BSF    FC0.7
+043C:  BSF    FC2.0
 ....................     while (TRUE) { 
 ....................       /* code */ 
 ....................       char opcion; 
 ....................       opcion = getc(); 
-043C:  BTFSS  F9E.5
-043E:  BRA    043C
-0440:  MOVFF  FAE,05
+043E:  BTFSS  F9E.5
+0440:  BRA    043E
+0442:  MOVFF  FAE,05
 ....................  
 ....................       switch (opcion) { 
-0444:  MOVF   05,W
-0446:  XORLW  78
-0448:  BZ    045C
-044A:  XORLW  1B
-044C:  BZ    046E
-044E:  XORLW  11
-0450:  BZ    0472
-0452:  XORLW  01
-0454:  BZ    04E2
-0456:  XORLW  1C
-0458:  BZ    04F2
-045A:  BRA    0500
+0446:  MOVF   05,W
+0448:  XORLW  78
+044A:  BZ    0462
+044C:  XORLW  1B
+044E:  BZ    0474
+0450:  XORLW  11
+0452:  BZ    0478
+0454:  XORLW  01
+0456:  BZ    04EA
+0458:  XORLW  1C
+045A:  BZ    04FA
+045C:  XORLW  02
+045E:  BZ    050A
+0460:  BRA    0516
 ....................         case 'x': //ENVIA LAS LECTURAS DE LOS SENSORES 
 ....................         { 
 ....................           //printf("Enviando datos..."); 
 ....................           motor_s(1,'I','>'); 
-045C:  MOVLW  01
-045E:  MOVWF  16
-0460:  MOVLW  49
-0462:  MOVWF  17
-0464:  MOVLW  3E
-0466:  MOVWF  18
-0468:  RCALL  001A
+0462:  MOVLW  01
+0464:  MOVWF  17
+0466:  MOVLW  49
+0468:  MOVWF  18
+046A:  MOVLW  3E
+046C:  MOVWF  19
+046E:  RCALL  001A
 ....................           sampling_ADC(); 
-046A:  BRA    00E6
+0470:  BRA    00E6
 ....................           break; 
-046C:  BRA    0518
+0472:  BRA    052E
 ....................         } 
 ....................         case 'c': // CALIBRA LA MAQUINA MANDANDOLA AL ORIGEN 
 ....................         { 
 ....................           //printf("Calibrando..."); 
 ....................           calibracion(); 
-046E:  BRA    015C
+0474:  BRA    015C
 ....................           break; 
-0470:  BRA    0518
+0476:  BRA    052E
 ....................         } 
 ....................         case 'r': // RECIVE LOS DATOS DE LA PC 
 ....................         { 
 ....................           int repeat ; 
 ....................           int32 time_motor; 
 ....................           int32 milimetro = 2000; 
-0472:  CLRF   0E
-0474:  CLRF   0D
-0476:  MOVLW  07
-0478:  MOVWF  0C
-047A:  MOVLW  D0
-047C:  MOVWF  0B
+0478:  CLRF   0E
+047A:  CLRF   0D
+047C:  MOVLW  07
+047E:  MOVWF  0C
+0480:  MOVLW  D0
+0482:  MOVWF  0B
 ....................           r_datos(&repeat,&time_motor); 
-047E:  CLRF   12
-0480:  MOVLW  06
-0482:  MOVWF  11
-0484:  CLRF   14
-0486:  MOVLW  07
-0488:  MOVWF  13
-048A:  BRA    01CC
+0484:  CLRF   13
+0486:  MOVLW  06
+0488:  MOVWF  12
+048A:  CLRF   15
+048C:  MOVLW  07
+048E:  MOVWF  14
+0490:  BRA    01CC
 ....................           cut_start(time_motor); 
-048C:  MOVFF  08,12
-0490:  MOVFF  07,11
-0494:  MOVFF  08,14
-0498:  MOVFF  07,13
-049C:  BRA    0260
+0492:  MOVFF  08,13
+0496:  MOVFF  07,12
+049A:  MOVFF  08,15
+049E:  MOVFF  07,14
+04A2:  BRA    0260
 ....................           output_b(0x00); 
-049E:  CLRF   F93
-04A0:  CLRF   F8A
+04A4:  CLRF   F93
+04A6:  CLRF   F8A
 ....................           on_cortadora(); 
-04A2:  BRA    02D6
+04A8:  BRA    02D6
 ....................           for (int i = 0; i < repeat; i++) { 
-04A4:  CLRF   0F
-04A6:  MOVF   06,W
-04A8:  SUBWF  0F,W
-04AA:  BC    04C2
+04AA:  CLRF   0F
+04AC:  MOVF   06,W
+04AE:  SUBWF  0F,W
+04B0:  BC    04CA
 ....................            corte_maquina(milimetro); 
-04AC:  MOVFF  0E,14
-04B0:  MOVFF  0D,13
-04B4:  MOVFF  0C,12
-04B8:  MOVFF  0B,11
-04BC:  BRA    02DE
-04BE:  INCF   0F,F
-04C0:  BRA    04A6
+04B2:  MOVFF  0E,15
+04B6:  MOVFF  0D,14
+04BA:  MOVFF  0C,13
+04BE:  MOVFF  0B,12
+04C2:  BRA    02DE
+....................            break; 
+04C4:  BRA    04CA
+04C6:  INCF   0F,F
+04C8:  BRA    04AC
 ....................           } 
 ....................           motor_s(1,'O',' '); 
-04C2:  MOVLW  01
-04C4:  MOVWF  16
-04C6:  MOVLW  4F
-04C8:  MOVWF  17
-04CA:  MOVLW  20
-04CC:  MOVWF  18
-04CE:  RCALL  001A
+04CA:  MOVLW  01
+04CC:  MOVWF  17
+04CE:  MOVLW  4F
+04D0:  MOVWF  18
+04D2:  MOVLW  20
+04D4:  MOVWF  19
+04D6:  RCALL  001A
 ....................           motor_s(2,'O',' '); 
-04D0:  MOVLW  02
-04D2:  MOVWF  16
-04D4:  MOVLW  4F
-04D6:  MOVWF  17
-04D8:  MOVLW  20
-04DA:  MOVWF  18
-04DC:  RCALL  001A
+04D8:  MOVLW  02
+04DA:  MOVWF  17
+04DC:  MOVLW  4F
+04DE:  MOVWF  18
+04E0:  MOVLW  20
+04E2:  MOVWF  19
+04E4:  RCALL  001A
 ....................           off_cortadora(); 
-04DE:  BRA    03A6
+04E6:  BRA    03A6
 ....................           break; 
-04E0:  BRA    0518
+04E8:  BRA    052E
 ....................         } 
 ....................         case 's':{ // PREPARA PARA EMPEZAR A SENSAR 
 ....................           char regreso; 
 ....................           regreso = sensor_start(); 
-04E2:  BRA    03AE
-04E4:  MOVFF  01,10
+04EA:  BRA    03AE
+04EC:  MOVFF  01,10
 ....................           printf("%c",regreso); 
-04E8:  MOVF   10,W
-04EA:  BTFSS  F9E.4
-04EC:  BRA    04EA
-04EE:  MOVWF  FAD
+04F0:  MOVF   10,W
+04F2:  BTFSS  F9E.4
+04F4:  BRA    04F2
+04F6:  MOVWF  FAD
 ....................           break; 
-04F0:  BRA    0518
+04F8:  BRA    052E
 ....................         } 
 ....................         case 'o':{ 
 ....................           motor_s(1,'O',' '); 
-04F2:  MOVLW  01
-04F4:  MOVWF  16
-04F6:  MOVLW  4F
-04F8:  MOVWF  17
-04FA:  MOVLW  20
-04FC:  MOVWF  18
-04FE:  RCALL  001A
+04FA:  MOVLW  01
+04FC:  MOVWF  17
+04FE:  MOVLW  4F
+0500:  MOVWF  18
+0502:  MOVLW  20
+0504:  MOVWF  19
+0506:  RCALL  001A
+....................           break; 
+0508:  BRA    052E
+....................         } 
+....................         case 'm':{ 
+....................         unsigned char mundo = 0xff; 
+050A:  SETF   11
+....................         printf("%c",mundo); 
+050C:  MOVF   11,W
+050E:  BTFSS  F9E.4
+0510:  BRA    050E
+0512:  MOVWF  FAD
+....................         break; 
+0514:  BRA    052E
 ....................         } 
 ....................         default: 
 ....................         { 
 ....................           printf("Letra No Especificada"); 
-0500:  MOVLW  04
-0502:  MOVWF  FF6
-0504:  MOVLW  00
-0506:  MOVWF  FF7
-0508:  BRA    03D8
+0516:  MOVLW  04
+0518:  MOVWF  FF6
+051A:  MOVLW  00
+051C:  MOVWF  FF7
+051E:  BRA    03D8
 ....................           delay_ms(1000); 
-050A:  MOVLW  04
-050C:  MOVWF  11
-050E:  MOVLW  FA
-0510:  MOVWF  1A
-0512:  RCALL  023A
-0514:  DECFSZ 11,F
-0516:  BRA    050E
+0520:  MOVLW  04
+0522:  MOVWF  12
+0524:  MOVLW  FA
+0526:  MOVWF  1B
+0528:  RCALL  023A
+052A:  DECFSZ 12,F
+052C:  BRA    0524
 ....................           break; 
 ....................         } 
 ....................       } 
-0518:  BRA    043C
+052E:  BRA    043E
 ....................     } 
 ....................  
 .................... } 
 .................... void send_info_rs232(int16 a, int16 b, int16 c, int16 d, int16 e){ // @ Envia los datos a la computadora en forma de caracteres @// 
-051A:  SLEEP 
+0530:  SLEEP 
 ....................       unsigned char data[10]; 
 ....................       int x; 
 ....................  
 ....................       data[0] = a; 
 *
-0094:  MOVFF  1C,26
+0094:  MOVFF  1D,27
 ....................       data[1] = a>>8; 
-0098:  MOVFF  1D,27
+0098:  MOVFF  1E,28
 ....................       data[2] = b; 
-009C:  MOVFF  1E,28
+009C:  MOVFF  1F,29
 ....................       data[3] = b>>8; 
-00A0:  MOVFF  1F,29
+00A0:  MOVFF  20,2A
 ....................       data[4] = c; 
-00A4:  MOVFF  20,2A
+00A4:  MOVFF  21,2B
 ....................       data[5] = c>>8; 
-00A8:  MOVFF  21,2B
+00A8:  MOVFF  22,2C
 ....................       data[6] = d; 
-00AC:  MOVFF  22,2C
+00AC:  MOVFF  23,2D
 ....................       data[7] = d>>8; 
-00B0:  MOVFF  23,2D
+00B0:  MOVFF  24,2E
 ....................       data[8] = e; 
-00B4:  MOVFF  24,2E
+00B4:  MOVFF  25,2F
 ....................       data[9] = e>>8; 
-00B8:  MOVFF  25,2F
+00B8:  MOVFF  26,30
 ....................  
 ....................       for(x = 0 ; x<10 ; x++){ 
-00BC:  CLRF   30
-00BE:  MOVF   30,W
+00BC:  CLRF   31
+00BE:  MOVF   31,W
 00C0:  SUBLW  09
 00C2:  BNC   00E2
 ....................  
 ....................         printf("%c",data[x]); 
 00C4:  CLRF   03
-00C6:  MOVF   30,W
-00C8:  ADDLW  26
+00C6:  MOVF   31,W
+00C8:  ADDLW  27
 00CA:  MOVWF  FE9
 00CC:  MOVLW  00
 00CE:  ADDWFC 03,W
 00D0:  MOVWF  FEA
-00D2:  MOVFF  FEF,31
-00D6:  MOVF   31,W
+00D2:  MOVFF  FEF,32
+00D6:  MOVF   32,W
 00D8:  BTFSS  F9E.4
 00DA:  BRA    00D8
 00DC:  MOVWF  FAD
-00DE:  INCF   30,F
+00DE:  INCF   31,F
 00E0:  BRA    00BE
 ....................  
 ....................       } 
@@ -367,8 +385,8 @@ CCS PCH C Compiler, Version 5.015, 5967               07-Jan-16 14:33
 ....................   int16 medicion[5]; 
 ....................  
 ....................   for(int j = 0; j <= 4; j++) 
-00E6:  CLRF   1B
-00E8:  MOVF   1B,W
+00E6:  CLRF   1C
+00E8:  MOVF   1C,W
 00EA:  SUBLW  04
 00EC:  BNC   012E
 ....................    {/* 
@@ -383,7 +401,7 @@ CCS PCH C Compiler, Version 5.015, 5967               07-Jan-16 14:33
 ....................       else 
 ....................       {*/ 
 ....................          set_adc_channel(j); 
-00EE:  RLCF   1B,W
+00EE:  RLCF   1C,W
 00F0:  MOVWF  00
 00F2:  RLCF   00,F
 00F4:  MOVLW  FC
@@ -401,9 +419,9 @@ CCS PCH C Compiler, Version 5.015, 5967               07-Jan-16 14:33
 010A:  NOP   
 ....................          medicion[j] = read_adc(); 
 010C:  BCF    FD8.0
-010E:  RLCF   1B,W
+010E:  RLCF   1C,W
 0110:  CLRF   03
-0112:  ADDLW  11
+0112:  ADDLW  12
 0114:  MOVWF  FE9
 0116:  MOVLW  00
 0118:  ADDWFC 03,W
@@ -413,34 +431,34 @@ CCS PCH C Compiler, Version 5.015, 5967               07-Jan-16 14:33
 0120:  BRA    011E
 0122:  MOVFF  FC3,FEF
 0126:  MOVFF  FC4,FEC
-012A:  INCF   1B,F
+012A:  INCF   1C,F
 012C:  BRA    00E8
 ....................         } 
 ....................   //  } 
 ....................  
 ....................     send_info_rs232(medicion[0],medicion[1],medicion[2],medicion[3],medicion[4]); 
-012E:  MOVFF  12,1D
-0132:  MOVFF  11,1C
-0136:  MOVFF  14,1F
-013A:  MOVFF  13,1E
-013E:  MOVFF  16,21
-0142:  MOVFF  15,20
-0146:  MOVFF  18,23
-014A:  MOVFF  17,22
-014E:  MOVFF  1A,25
-0152:  MOVFF  19,24
+012E:  MOVFF  13,1E
+0132:  MOVFF  12,1D
+0136:  MOVFF  15,20
+013A:  MOVFF  14,1F
+013E:  MOVFF  17,22
+0142:  MOVFF  16,21
+0146:  MOVFF  19,24
+014A:  MOVFF  18,23
+014E:  MOVFF  1B,26
+0152:  MOVFF  1A,25
 0156:  BRA    0094
-0158:  GOTO   0518 (RETURN)
+0158:  GOTO   052E (RETURN)
 .................... } 
 .................... void calibracion(){ 
-015C:  BSF    11.0
-015E:  BSF    11.1
+015C:  BSF    12.0
+015E:  BSF    12.1
 ....................  
 ....................     int1 limit_1 = 1,limit_2 = 1; 
 ....................     do { 
 ....................  
 ....................        if(limit_1 == 1){ 
-0160:  BTFSS  11.0
+0160:  BTFSS  12.0
 0162:  BRA    018A
 ....................          if(input(PIN_D0)){ 
 0164:  BSF    F95.0
@@ -448,30 +466,30 @@ CCS PCH C Compiler, Version 5.015, 5967               07-Jan-16 14:33
 0168:  BRA    017C
 ....................            motor_s(1,'O','>'); 
 016A:  MOVLW  01
-016C:  MOVWF  16
+016C:  MOVWF  17
 016E:  MOVLW  4F
-0170:  MOVWF  17
+0170:  MOVWF  18
 0172:  MOVLW  3E
-0174:  MOVWF  18
+0174:  MOVWF  19
 0176:  RCALL  001A
 ....................            limit_1 = 0; 
-0178:  BCF    11.0
+0178:  BCF    12.0
 ....................          } 
 017A:  BRA    018A
 ....................          else{ 
 ....................            motor_s(1,'I','<'); 
 017C:  MOVLW  01
-017E:  MOVWF  16
+017E:  MOVWF  17
 0180:  MOVLW  49
-0182:  MOVWF  17
+0182:  MOVWF  18
 0184:  MOVLW  3C
-0186:  MOVWF  18
+0186:  MOVWF  19
 0188:  RCALL  001A
 ....................  
 ....................          } 
 ....................        } 
 ....................        if(limit_2 == 1){ 
-018A:  BTFSS  11.1
+018A:  BTFSS  12.1
 018C:  BRA    01B4
 ....................          if(input(PIN_D1)){ 
 018E:  BSF    F95.1
@@ -479,55 +497,55 @@ CCS PCH C Compiler, Version 5.015, 5967               07-Jan-16 14:33
 0192:  BRA    01A6
 ....................            motor_s(2,'O','>'); 
 0194:  MOVLW  02
-0196:  MOVWF  16
+0196:  MOVWF  17
 0198:  MOVLW  4F
-019A:  MOVWF  17
+019A:  MOVWF  18
 019C:  MOVLW  3E
-019E:  MOVWF  18
+019E:  MOVWF  19
 01A0:  RCALL  001A
 ....................            limit_2 = 0; 
-01A2:  BCF    11.1
+01A2:  BCF    12.1
 ....................          } 
 01A4:  BRA    01B4
 ....................          else{ 
 ....................            motor_s(2,'I','<'); 
 01A6:  MOVLW  02
-01A8:  MOVWF  16
+01A8:  MOVWF  17
 01AA:  MOVLW  49
-01AC:  MOVWF  17
+01AC:  MOVWF  18
 01AE:  MOVLW  3C
-01B0:  MOVWF  18
+01B0:  MOVWF  19
 01B2:  RCALL  001A
 ....................          } 
 ....................         } 
 ....................     } while((limit_1 != 0)||(limit_2 != 0)); 
-01B4:  BTFSC  11.0
+01B4:  BTFSC  12.0
 01B6:  BRA    0160
-01B8:  BTFSC  11.1
+01B8:  BTFSC  12.1
 01BA:  BRA    0160
 ....................  
 ....................     char end = 'c'; 
 01BC:  MOVLW  63
-01BE:  MOVWF  12
+01BE:  MOVWF  13
 ....................  
 ....................     printf("%c",end); 
-01C0:  MOVF   12,W
+01C0:  MOVF   13,W
 01C2:  BTFSS  F9E.4
 01C4:  BRA    01C2
 01C6:  MOVWF  FAD
-01C8:  GOTO   0518 (RETURN)
+01C8:  GOTO   052E (RETURN)
 .................... } 
 .................... void r_datos(int *repeat, int32 *time_motor){ 
 ....................   char bucle[2]; 
 ....................     for (int i = 0; i < 2;  i++) { 
-01CC:  CLRF   17
-01CE:  MOVF   17,W
+01CC:  CLRF   18
+01CE:  MOVF   18,W
 01D0:  SUBLW  01
 01D2:  BNC   01EE
 ....................       bucle[i] = getc(); 
 01D4:  CLRF   03
-01D6:  MOVF   17,W
-01D8:  ADDLW  15
+01D6:  MOVF   18,W
+01D8:  ADDLW  16
 01DA:  MOVWF  FE9
 01DC:  MOVLW  00
 01DE:  ADDWFC 03,W
@@ -535,16 +553,16 @@ CCS PCH C Compiler, Version 5.015, 5967               07-Jan-16 14:33
 01E2:  BTFSS  F9E.5
 01E4:  BRA    01E2
 01E6:  MOVFF  FAE,FEF
-01EA:  INCF   17,F
+01EA:  INCF   18,F
 01EC:  BRA    01CE
 ....................     } 
 ....................     *repeat = bucle[0]; 
-01EE:  MOVFF  11,FE9
-01F2:  MOVFF  12,FEA
-01F6:  MOVFF  15,FEF
+01EE:  MOVFF  12,FE9
+01F2:  MOVFF  13,FEA
+01F6:  MOVFF  16,FEF
 ....................     *time_motor = bucle[1]; 
-01FA:  MOVFF  13,FE9
-01FE:  MOVFF  14,FEA
+01FA:  MOVFF  14,FE9
+01FE:  MOVFF  15,FEA
 0202:  MOVF   FEE,F
 0204:  MOVF   FEE,F
 0206:  CLRF   FEC
@@ -553,19 +571,19 @@ CCS PCH C Compiler, Version 5.015, 5967               07-Jan-16 14:33
 020C:  MOVF   FED,F
 020E:  CLRF   FEF
 0210:  MOVF   FED,F
-0212:  MOVFF  16,FEF
-0216:  GOTO   048C (RETURN)
+0212:  MOVFF  17,FEF
+0216:  GOTO   0492 (RETURN)
 .................... } 
 .................... void corte_maquina(int32 times){ 
 ....................   do { 
 ....................     motor_s(1,'I','>'); 
 *
 02DE:  MOVLW  01
-02E0:  MOVWF  16
+02E0:  MOVWF  17
 02E2:  MOVLW  49
-02E4:  MOVWF  17
+02E4:  MOVWF  18
 02E6:  MOVLW  3E
-02E8:  MOVWF  18
+02E8:  MOVWF  19
 02EA:  RCALL  001A
 ....................   } while((input(l_2)) != 1); 
 02EC:  BSF    F95.1
@@ -574,47 +592,47 @@ CCS PCH C Compiler, Version 5.015, 5967               07-Jan-16 14:33
 ....................  
 ....................   motor_s(1,'O',' '); 
 02F2:  MOVLW  01
-02F4:  MOVWF  16
+02F4:  MOVWF  17
 02F6:  MOVLW  4F
-02F8:  MOVWF  17
+02F8:  MOVWF  18
 02FA:  MOVLW  20
-02FC:  MOVWF  18
+02FC:  MOVWF  19
 02FE:  RCALL  001A
 ....................   motor_s(2,'I','A'); 
 0300:  MOVLW  02
-0302:  MOVWF  16
+0302:  MOVWF  17
 0304:  MOVLW  49
-0306:  MOVWF  17
+0306:  MOVWF  18
 0308:  MOVLW  41
-030A:  MOVWF  18
+030A:  MOVWF  19
 030C:  RCALL  001A
 ....................   delay_ms(times); 
-030E:  MOVFF  12,15
-0312:  INCF   15,F
-0314:  DECF   15,F
+030E:  MOVFF  13,16
+0312:  INCF   16,F
+0314:  DECF   16,F
 0316:  BTFSC  FD8.2
 0318:  BRA    0320
-031A:  SETF   1A
+031A:  SETF   1B
 031C:  RCALL  023A
 031E:  BRA    0314
-0320:  MOVFF  11,1A
+0320:  MOVFF  12,1B
 0324:  RCALL  023A
 ....................   motor_s(2,'O',' '); 
 0326:  MOVLW  02
-0328:  MOVWF  16
+0328:  MOVWF  17
 032A:  MOVLW  4F
-032C:  MOVWF  17
+032C:  MOVWF  18
 032E:  MOVLW  20
-0330:  MOVWF  18
+0330:  MOVWF  19
 0332:  RCALL  001A
 ....................   do { 
 ....................     motor_s(1,'I','<'); 
 0334:  MOVLW  01
-0336:  MOVWF  16
+0336:  MOVWF  17
 0338:  MOVLW  49
-033A:  MOVWF  17
+033A:  MOVWF  18
 033C:  MOVLW  3C
-033E:  MOVWF  18
+033E:  MOVWF  19
 0340:  RCALL  001A
 ....................   } while((input(l_1)) != 1); 
 0342:  BSF    F95.0
@@ -622,58 +640,58 @@ CCS PCH C Compiler, Version 5.015, 5967               07-Jan-16 14:33
 0346:  BRA    0334
 ....................   motor_s(1,'O',' '); 
 0348:  MOVLW  01
-034A:  MOVWF  16
+034A:  MOVWF  17
 034C:  MOVLW  4F
-034E:  MOVWF  17
+034E:  MOVWF  18
 0350:  MOVLW  20
-0352:  MOVWF  18
+0352:  MOVWF  19
 0354:  RCALL  001A
 ....................   motor_s(2,'I','V'); 
 0356:  MOVLW  02
-0358:  MOVWF  16
+0358:  MOVWF  17
 035A:  MOVLW  49
-035C:  MOVWF  17
+035C:  MOVWF  18
 035E:  MOVLW  56
-0360:  MOVWF  18
+0360:  MOVWF  19
 0362:  RCALL  001A
 ....................   delay_ms(times + times); 
-0364:  MOVF   11,W
-0366:  ADDWF  11,W
-0368:  MOVWF  15
-036A:  MOVF   12,W
-036C:  ADDWFC 12,W
-036E:  MOVWF  16
-0370:  MOVF   13,W
-0372:  ADDWFC 13,W
-0374:  MOVWF  17
-0376:  MOVF   14,W
-0378:  ADDWFC 14,W
-037A:  MOVWF  18
-037C:  MOVFF  16,19
-0380:  INCF   19,F
-0382:  DECF   19,F
+0364:  MOVF   12,W
+0366:  ADDWF  12,W
+0368:  MOVWF  16
+036A:  MOVF   13,W
+036C:  ADDWFC 13,W
+036E:  MOVWF  17
+0370:  MOVF   14,W
+0372:  ADDWFC 14,W
+0374:  MOVWF  18
+0376:  MOVF   15,W
+0378:  ADDWFC 15,W
+037A:  MOVWF  19
+037C:  MOVFF  17,1A
+0380:  INCF   1A,F
+0382:  DECF   1A,F
 0384:  BTFSC  FD8.2
 0386:  BRA    038E
-0388:  SETF   1A
+0388:  SETF   1B
 038A:  RCALL  023A
 038C:  BRA    0382
-038E:  MOVFF  15,1A
+038E:  MOVFF  16,1B
 0392:  RCALL  023A
 ....................   motor_S(2,'O',' '); 
 0394:  MOVLW  02
-0396:  MOVWF  16
+0396:  MOVWF  17
 0398:  MOVLW  4F
-039A:  MOVWF  17
+039A:  MOVWF  18
 039C:  MOVLW  20
-039E:  MOVWF  18
+039E:  MOVWF  19
 03A0:  RCALL  001A
-03A2:  GOTO   04BE (RETURN)
+03A2:  GOTO   04CA (RETURN)
 .................... } 
 .................... void motor_s(int num_motor,char estado,char direccion){ 
 ....................  
 ....................   switch (num_motor) { 
 *
-001A:  MOVF   16,W
+001A:  MOVF   17,W
 001C:  XORLW  01
 001E:  BZ    0026
 0020:  XORLW  03
@@ -681,7 +699,7 @@ CCS PCH C Compiler, Version 5.015, 5967               07-Jan-16 14:33
 0024:  BRA    0092
 ....................     case 1:{ // ELEGIR MOTOR 1 
 ....................       switch (estado) { 
-0026:  MOVF   17,W
+0026:  MOVF   18,W
 0028:  XORLW  49
 002A:  BZ    0032
 002C:  XORLW  06
@@ -689,7 +707,7 @@ CCS PCH C Compiler, Version 5.015, 5967               07-Jan-16 14:33
 0030:  BRA    005A
 ....................         case 'I':{ // SELECCIONA ON 
 ....................             switch (direccion) { 
-0032:  MOVF   18,W
+0032:  MOVF   19,W
 0034:  XORLW  3E
 0036:  BZ    003E
 0038:  XORLW  02
@@ -734,7 +752,7 @@ CCS PCH C Compiler, Version 5.015, 5967               07-Jan-16 14:33
 ....................     } 
 ....................     case 2:{ // ELEGIR MOTOR 2 
 ....................       switch (estado) { 
-005C:  MOVF   17,W
+005C:  MOVF   18,W
 005E:  XORLW  49
 0060:  BZ    0068
 0062:  XORLW  06
@@ -742,7 +760,7 @@ CCS PCH C Compiler, Version 5.015, 5967               07-Jan-16 14:33
 0066:  BRA    0090
 ....................         case 'I':{ // SELECCIONA ON 
 ....................             switch (direccion) { 
-0068:  MOVF   18,W
+0068:  MOVF   19,W
 006A:  XORLW  41
 006C:  BZ    0074
 006E:  XORLW  17
@@ -793,11 +811,11 @@ CCS PCH C Compiler, Version 5.015, 5967               07-Jan-16 14:33
 ....................     motor_s(1,'I','>'); 
 *
 03AE:  MOVLW  01
-03B0:  MOVWF  16
+03B0:  MOVWF  17
 03B2:  MOVLW  49
-03B4:  MOVWF  17
+03B4:  MOVWF  18
 03B6:  MOVLW  3E
-03B8:  MOVWF  18
+03B8:  MOVWF  19
 03BA:  RCALL  001A
 ....................   } while((input(limit_sensor)) != 1); 
 03BC:  BSF    F95.3
@@ -805,30 +823,30 @@ CCS PCH C Compiler, Version 5.015, 5967               07-Jan-16 14:33
 03C0:  BRA    03AE
 ....................   motor_s(1,'O',' '); 
 03C2:  MOVLW  01
-03C4:  MOVWF  16
+03C4:  MOVWF  17
 03C6:  MOVLW  4F
-03C8:  MOVWF  17
+03C8:  MOVWF  18
 03CA:  MOVLW  20
-03CC:  MOVWF  18
+03CC:  MOVWF  19
 03CE:  RCALL  001A
 ....................   return 'n'; 
 03D0:  MOVLW  6E
 03D2:  MOVWF  01
-03D4:  GOTO   04E4 (RETURN)
+03D4:  GOTO   04EC (RETURN)
 .................... } 
 .................... void cut_start(int16 time_motor){ 
 *
 0260:  MOVLW  90
-0262:  MOVWF  15
+0262:  MOVWF  16
 ....................   int avance_motor = 400; 
 ....................   do { 
 ....................     motor_s(1,'I','<'); 
 0264:  MOVLW  01
-0266:  MOVWF  16
+0266:  MOVWF  17
 0268:  MOVLW  49
-026A:  MOVWF  17
+026A:  MOVWF  18
 026C:  MOVLW  3C
-026E:  MOVWF  18
+026E:  MOVWF  19
 0270:  RCALL  001A
 ....................   } while((input(l_1)) != 1); 
 0272:  BSF    F95.0
@@ -836,47 +854,47 @@ CCS PCH C Compiler, Version 5.015, 5967               07-Jan-16 14:33
 0276:  BRA    0264
 ....................    motor_s(1,'O',' '); 
 0278:  MOVLW  01
-027A:  MOVWF  16
+027A:  MOVWF  17
 027C:  MOVLW  4F
-027E:  MOVWF  17
+027E:  MOVWF  18
 0280:  MOVLW  20
-0282:  MOVWF  18
+0282:  MOVWF  19
 0284:  RCALL  001A
 ....................    motor_s(2,'I','V'); 
 0286:  MOVLW  02
-0288:  MOVWF  16
+0288:  MOVWF  17
 028A:  MOVLW  49
-028C:  MOVWF  17
+028C:  MOVWF  18
 028E:  MOVLW  56
-0290:  MOVWF  18
+0290:  MOVWF  19
 0292:  RCALL  001A
 ....................    delay_ms(time_motor * avance_motor); 
-0294:  MOVFF  14,17
-0298:  MOVFF  13,16
-029C:  CLRF   19
-029E:  MOVFF  15,18
+0294:  MOVFF  15,18
+0298:  MOVFF  14,17
+029C:  CLRF   1A
+029E:  MOVFF  16,19
 02A2:  BRA    021A
-02A4:  MOVFF  02,17
-02A8:  MOVFF  01,16
-02AC:  MOVFF  02,18
-02B0:  INCF   18,F
-02B2:  DECF   18,F
+02A4:  MOVFF  02,18
+02A8:  MOVFF  01,17
+02AC:  MOVFF  02,19
+02B0:  INCF   19,F
+02B2:  DECF   19,F
 02B4:  BTFSC  FD8.2
 02B6:  BRA    02BE
-02B8:  SETF   1A
+02B8:  SETF   1B
 02BA:  RCALL  023A
 02BC:  BRA    02B2
-02BE:  MOVFF  16,1A
+02BE:  MOVFF  17,1B
 02C2:  RCALL  023A
 ....................    motor_s(2,'O',' '); 
 02C4:  MOVLW  02
-02C6:  MOVWF  16
+02C6:  MOVWF  17
 02C8:  MOVLW  4F
-02CA:  MOVWF  17
+02CA:  MOVWF  18
 02CC:  MOVLW  20
-02CE:  MOVWF  18
+02CE:  MOVWF  19
 02D0:  RCALL  001A
-02D2:  GOTO   049E (RETURN)
+02D2:  GOTO   04A4 (RETURN)
 ....................  
 .................... } 
 .................... void on_cortadora(void){ 
@@ -884,7 +902,7 @@ CCS PCH C Compiler, Version 5.015, 5967               07-Jan-16 14:33
 ....................   output_high(PIN_B4); 
 02D6:  BCF    F93.4
 02D8:  BSF    F8A.4
-02DA:  GOTO   04A4 (RETURN)
+02DA:  GOTO   04AA (RETURN)
 .................... } 
 .................... void off_cortadora(void){ 
 ....................  
@@ -892,7 +910,7 @@ CCS PCH C Compiler, Version 5.015, 5967               07-Jan-16 14:33
 *
 03A6:  BCF    F93.4
 03A8:  BCF    F8A.4
-03AA:  GOTO   0518 (RETURN)
+03AA:  GOTO   052E (RETURN)
 .................... } 
 
 Configuration Fuses:

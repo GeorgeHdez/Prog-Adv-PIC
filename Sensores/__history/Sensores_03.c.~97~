@@ -5,7 +5,7 @@ Void main() {
   /* code */
     setup_oscillator(OSC_8MHZ|OSC_INTRC);
     setup_adc_ports(AN0_TO_AN8);
-    setup_adc(ADC_CLOCK_INTERNAL);
+    setup_adc(ADC_CLOCK_DIV_2);
     while (TRUE) {
       /* code */
       char opcion;
@@ -36,7 +36,6 @@ Void main() {
           on_cortadora();
           for (int i = 0; i < repeat; i++) {
            corte_maquina(milimetro);
-           break;
           }
           motor_s(1,'O',' ');
           motor_s(2,'O',' ');
@@ -51,12 +50,6 @@ Void main() {
         }
         case 'o':{
           motor_s(1,'O',' ');
-          break;
-        }
-        case 'm':{
-        unsigned char mundo = 0xff;
-        printf("%c",mundo);
-        break;
         }
         default:
         {
